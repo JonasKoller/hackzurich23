@@ -59,4 +59,8 @@ export class RoutePlannerComponent implements AfterViewInit {
 
     this.valueSwitchClicked.emit();
   }
+
+  calculateTrafficStatus() {
+    
+  }
 }
