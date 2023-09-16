@@ -11,5 +11,6 @@
 <article class="p-6 mb-16 text-justify">
   <p>{{article.summary}}</p>
   <p class="mt-8">{{article.text}}</p>
-  <button class="btn btn-block mt-6 btn-primary" [routerLink]="['/learning']" (click)="claimCoinsClick()">Claim <div class="badge badge-success gap-2">{{article.pointReward}}</div> Coins</button>
+  <button class="btn btn-block mt-6 btn-primary" [routerLink]="['/learning']" (click)="claimCoinsClick()" *ngIf="isArticleRead == false">Claim <div class="badge badge-success gap-2">{{article.pointReward}}</div> Coins</button>
+  <button class="btn btn-block mt-6 btn-primary" [routerLink]="['/learning']" (click)="claimCoinsClick()" *ngIf="isArticleRead == true">Coins already claimed</button>
 </article>

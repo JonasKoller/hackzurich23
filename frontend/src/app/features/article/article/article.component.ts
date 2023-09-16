@@ -10,6 +10,7 @@ export class ArticleComponent {
 
   @Input() article: Article;
   @Output() claimCoinsClicked = new EventEmitter<void>();
+  @Input() isArticleRead: boolean;
 
   claimCoinsClick() {
     this.claimCoinsClicked.emit();

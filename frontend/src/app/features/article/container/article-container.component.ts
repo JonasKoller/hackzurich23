@@ -10,13 +10,12 @@ import {PointsService} from "../../../core/services/points.service";
 })
 export class ArticleContainerComponent {
   article: Article | undefined = undefined;
+  isArticleRead = false;
 
   constructor(
     private readableService: ReadableService,
     private route: ActivatedRoute,
     private pointsService: PointsService) {
-
-
   }
 
   async ngOnInit() {
@@ -25,11 +24,13 @@ export class ArticleContainerComponent {
     const articleId = parseInt(this.route.snapshot.queryParamMap.get('id') as string);
     if (articleId == null) return;
     this.article = articles.find((a: Article) => a.id === articleId);
+    this.isArticleRead = this.readableService.isArticleRead(this.article!.id);
   }
 
   claimCoinsClicked() {
-    if (this.article?.pointReward) {
+    if (this.article?.pointReward && !this.readableService.isArticleRead(this.article.id)) {
       this.pointsService.addPoints(this.article?.pointReward);
+      this.readableService.addArticlesRead(this.article.id);
     }
   }
 }
