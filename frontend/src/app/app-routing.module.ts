@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/learning/learning.module').then((m) => m.LearningModule),
   },
   {
+    path: 'article',
+    loadChildren: () => import('./features/article/article.module').then((m) => m.ArticleModule),
+  },
+  {
     path: '**',
     redirectTo: 'route-planner',
   },

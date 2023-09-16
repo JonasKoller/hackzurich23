@@ -91,9 +91,16 @@
           </div>
           <div class="collapse-content">
             <div class="information">
-              <p>Time till destination with traffic {{ results?.car?.durationInTraffic?.text }}</p>
-              <p>Losing time due to traffic {{ results?.car?.offsetTraffic?.text }}</p>
-              <a [href]="carDeepLink">Google Maps</a>
+              <div class="stat">
+                <div class="stat-title">Time till destination with traffic</div>
+                <div class="stat-value">{{ results?.car?.durationInTraffic?.text }}</div>
+              </div>
+
+              <div class="stat">
+                <div class="stat-title">Losing time due to traffic</div>
+                <div class="stat-value">{{ results?.car?.offsetTraffic?.text }}</div>
+              </div>
+              <a [href]="carDeepLink" class="link link-primary">Google Maps</a>
             </div>
           </div>
         </div>
@@ -114,13 +121,18 @@
           </div>
           <div class="collapse-content">
             <div class="information">
-              <p>Time till destination {{ results?.publicTransport?.duration?.text}}
-              </p>
-              <p>{{ getTrainAgainstCar() >= 0 ? 'Slower' : 'Faster' }}
-                than car {{ results?.publicTransport?.offsetTraffic?.text}}
+              <div class="stat">
+                <div class="stat-title">Time till destination</div>
+                <div class="stat-value">{{ results?.publicTransport?.duration?.text }}</div>
+              </div>
 
-              </p>
-              <a [href]="sbbDeepLink">SBB CRAZY</a>
+              <div class="stat">
+                <div class="stat-title">{{getTrainAgainstCar() >= 0 ? 'Slower' : 'Faster' }}
+                  than car
+                </div>
+                <div class="stat-value">{{ results?.publicTransport?.offsetTraffic?.text }}</div>
+              </div>
+              <a [href]="sbbDeepLink" class="link link-primary">Check on SBB</a>
             </div>
 
           </div>

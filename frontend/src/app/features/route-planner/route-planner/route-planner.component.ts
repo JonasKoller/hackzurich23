@@ -28,7 +28,6 @@ export class RoutePlannerComponent implements AfterViewInit {
   @Output() valueSwitchClicked = new EventEmitter<void>();
 
   @Output() analyzeClicked = new EventEmitter<void>();
-  protected readonly undefined = undefined;
 
   ngAfterViewInit(): void {
     const options: AutocompleteOptions = {
