@@ -1,21 +1,7 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Route, TimeType} from "../route";
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexDataLabels,
-  ApexFill,
-  ApexLegend,
-  ApexPlotOptions,
-  ApexStroke,
-  ApexTooltip,
-  ApexXAxis,
-  ApexYAxis
-} from "ng-apexcharts";
-import AutocompleteOptions = google.maps.places.AutocompleteOptions;
 import {ChartOptions} from "../chart-type";
-import {formatDistance} from "date-fns";
-
+import AutocompleteOptions = google.maps.places.AutocompleteOptions;
 
 
 @Component({
@@ -81,7 +67,7 @@ export class RoutePlannerComponent implements AfterViewInit {
   }
 
   calculateTrafficStatus() {
-if (!this.results) {
+    if (!this.results) {
       return '';
     }
 
@@ -93,5 +79,29 @@ if (!this.results) {
     } else {
       return 'High traffic';
     }
+  }
+
+  calculateTrainRecomendation() {
+    if (!this.results) {
+      return '';
+    }
+
+    const trainTimeAgainstCar = this.getTrainAgainstCar();
+
+    if (trainTimeAgainstCar <= 0) {
+      return 'Recommended';
+    } else if (trainTimeAgainstCar <= 15) {
+      return 'Neutral'
+    } else {
+      return 'Not Recommended';
+    }
+  }
+
+  getTrainAgainstCar() {
+    if (!this.results) {
+      return 0;
+    }
+
+    return this.results.publicTransport.duration.value - this.results.car.durationInTraffic.value;
   }
 }

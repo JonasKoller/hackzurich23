@@ -45,11 +45,21 @@
   }
 }
 
+.time-control {
+  width: 100%;
+}
+
 .result-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+}
+
+.time-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .search-img {
@@ -77,9 +87,12 @@
 
 .label-time {
   flex-direction: column;
-  align-items: flex-start;
 
   .label-text {
-    margin-bottom: 8px;
+    margin-bottom: 5px;
   }
+}
+
+.toggle {
+  background-color: #4f46e5;
 }

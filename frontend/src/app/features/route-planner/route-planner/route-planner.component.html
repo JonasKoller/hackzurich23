@@ -21,25 +21,27 @@
                   <input #toInput class="input input-bordered input-primary input-width" placeholder="To" type="text"/>
                 </div>
               </div>
-              <button (click)="valueSwitch()" class="btn btn-circle btn-outline btn-primary">
+              <button (click)="valueSwitch()" class="btn btn-circle btn-outline btn-secondary">
                 <svg fill="none" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
                   <path d="M10 6L7 3M7 3L4 6M7 3V17M14 18L17 21M17 21L20 18M17 21V7" stroke="currentColor"
                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                 </svg>
               </button>
             </div>
-            <div class="form-control">
-              <input (change)="timeChangedEvent($event)"
-                     [value]="time"
-                     class="input input-bordered input-primary input-width"
-                     placeholder="Time"
-                     type="time"/>
-            </div>
-            <div class="form-control w-52">
-              <label class="cursor-pointer label label-time">
-                <span class="label-text">Start</span>
-                <input class="toggle toggle-accent" type="checkbox"/>
-              </label>
+            <div class="time-wrap">
+              <div class="form-control time-control">
+                <input (change)="timeChangedEvent($event)"
+                       [value]="time"
+                       class="input input-bordered input-primary input-width"
+                       placeholder="Time"
+                       type="time"/>
+              </div>
+              <div class="form-control">
+                <label class="cursor-pointer label label-time">
+                  <span class="label-text">Start</span>
+                  <input class="toggle toggle-secondary" type="checkbox"/>
+                </label>
+              </div>
             </div>
             <div class="form-control mt-6">
               <button (click)="analyze()" class="btn btn-primary">Analyze Trip</button>
@@ -61,15 +63,15 @@
   </div>
   <div class="mini-constrainer" id="results">
 
-            <div *ngIf="results === undefined" class="search-img">
+    <div *ngIf="results === undefined" class="search-img">
       <p class="text-2xl">Start you journey now!</p>
       <img alt="Search image" src="/assets/images/search.svg">
     </div>
-                <div *ngIf="results !== undefined">
+    <div *ngIf="results !== undefined">
       <p>{{ results!.startAddress }}</p>
       <p>|</p>
       <p>\/</p>
-                <p class="mb-2">{{ results!.endAddress }}</p>
+      <p class="mb-2">{{ results!.endAddress }}</p>
       <p class="text-4xl text-primary mb-8">Results</p>
       <div class="result">
         <div class="collapse collapse-open border border-base-300 bg-base-200 mb-4" tabindex="0">
@@ -89,48 +91,51 @@
           </div>
           <div class="collapse-content">
             <div class="information">
-                <p>Time till destination with traffic {{ results?.car?.durationInTraffic?.text }}</p>
+              <p>Time till destination with traffic {{ results?.car?.durationInTraffic?.text }}</p>
               <p>Losing time due to traffic {{ results?.car?.offsetTraffic?.text }}</p>
             </div>
-              </div>
-              </div>
-                <div class="collapse collapse-open border border-base-300 bg-base-200" tabindex="0">
-                <div class="collapse-title text-xl font-medium">
+          </div>
+        </div>
+        <div class="collapse collapse-open border border-base-300 bg-base-200" tabindex="0">
+          <div class="collapse-title text-xl font-medium">
             <div class="result-info">
-                <div class="icon">
+              <div class="icon">
                 <svg fill="none" height="48px" viewBox="0 0 24 24" width="48px" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M8 14V15M16 14V15M5 11H12M19 11H12M6 21L8 18M16 18L18 21M12 6V11M12 6H5M12 6H19M5 6V16C5 17.1046 5.89543 18 7 18H17C18.1046 18 19 17.1046 19 16V6M5 6V6C5 4.34315 6.34315 3 8 3H16C17.6569 3 19 4.34315 19 6V6"
                     stroke="#302E80" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                 </svg>
               </div>
-              <div class="badge badge-success">Recommended</div>
+              <div
+                [ngClass]="{'badge-success' : calculateTrainRecomendation() === 'Recommended', 'badge-info' : calculateTrainRecomendation() === 'Neutral', 'badge-error' : calculateTrainRecomendation() === 'Not Recommended'}"
+                class="badge">{{ calculateTrainRecomendation() }}</div>
             </div>
           </div>
           <div class="collapse-content">
             <div class="information">
               <p>Time till destination {{ results?.publicTransport?.duration?.text}}
-                </p>
-                <p>Slower than car {{ results?.publicTransport?.offsetTraffic?.text}}
+              </p>
+              <p>{{ getTrainAgainstCar() >= 0 ? 'Slower' : 'Faster' }}
+                than car {{ results?.publicTransport?.offsetTraffic?.text}}
 
               </p>
               <a [href]="sbbDeepLink">SBB CRAZY</a>
             </div>
 
+          </div>
         </div>
-                </div>
         <div *ngIf="historyGraph !== undefined">
           <apx-chart
-            [series]="historyGraph!.series"
             [chart]="historyGraph!.chart"
             [dataLabels]="historyGraph!.dataLabels"
-            [plotOptions]="historyGraph!.plotOptions"
-            [yaxis]="historyGraph!.yaxis"
-            [legend]="historyGraph!.legend"
             [fill]="historyGraph!.fill"
+            [legend]="historyGraph!.legend"
+            [plotOptions]="historyGraph!.plotOptions"
+            [series]="historyGraph!.series"
             [stroke]="historyGraph!.stroke"
             [tooltip]="historyGraph!.tooltip"
             [xaxis]="historyGraph!.xaxis"
+            [yaxis]="historyGraph!.yaxis"
           ></apx-chart>
         </div>
       </div>
