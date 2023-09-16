@@ -8,8 +8,9 @@
 
 <div class="p-3" *ngIf="sliderValue == 500">
   <div class="alert flex p-3 flex-col">
-    <span>You are currently earning coins for sharing your Geo-data.</span>
-    <span class="loading loading-ring loading-lg mt-4"></span>
+    <span>📍 You are currently earning coins for sharing your Geo-data.</span>
+    <div class="radial-progress" [style]="'--value:' + currentProgress + ';'">{{currentProgress}}%</div>
+    <span>🛠️ Next coin in making...</span>
     <span class="mt-4">You earned <div class="badge badge-success gap-2">{{coinsEarned}}</div> coins in this session</span>
   </div>
 </div>
