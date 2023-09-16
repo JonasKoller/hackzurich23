@@ -37,7 +37,9 @@
                   [ngClass]="{ 'badge-error': shopItem.classification === 'One Time only', 'badge-accent': shopItem.classification === 'New' }"
                   class="badge">{{ shopItem.classification }}</span>
             <div class="card-actions justify-end">
-              <button [ngClass]="{'btn-disabled': points < shopItem.price}" class="btn btn-primary">Buy Now</button>
+              <button (click)="buyItem(shopItem)" [ngClass]="{'btn-disabled': points < shopItem.price}"
+                      class="btn btn-primary">Buy Now
+              </button>
             </div>
           </div>
         </div>

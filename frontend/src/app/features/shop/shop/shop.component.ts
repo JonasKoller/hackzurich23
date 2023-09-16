@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-shop',
@@ -8,6 +8,7 @@ import {Component, Input} from '@angular/core';
 export class ShopComponent {
   @Input() points: number;
   @Input() shopItems: any;
+  @Output() buyItemClicked = new EventEmitter<any>();
 
   sortByBuyingPower() {
     if (!this.shopItems) {
@@ -25,5 +26,9 @@ export class ShopComponent {
 
       return 0;
     });
+  }
+
+  buyItem(shopItem: any) {
+    this.buyItemClicked.emit(shopItem);
   }
 }

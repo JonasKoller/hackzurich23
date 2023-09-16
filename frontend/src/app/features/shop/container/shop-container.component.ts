@@ -18,4 +18,9 @@ export class ShopContainerComponent implements OnInit {
     this.points = this.pointsService.getPoints();
     this.shopItems$ = this.shopItemsService.getAllShopItems();
   }
+
+  buyShopItem(shopItem: any) {
+    this.pointsService.subPoint(shopItem.price);
+    this.points = this.pointsService.getPoints();
+  }
 }
