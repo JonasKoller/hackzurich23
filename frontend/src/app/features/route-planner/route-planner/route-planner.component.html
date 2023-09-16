@@ -60,15 +60,16 @@
     </div>
   </div>
   <div class="mini-constrainer" id="results">
-    <div *ngIf="results === undefined" class="search-img">
+
+            <div *ngIf="results === undefined" class="search-img">
       <p class="text-2xl">Start you journey now!</p>
       <img alt="Search image" src="/assets/images/search.svg">
     </div>
-    <div *ngIf="results !== undefined">
-      <p>{{ results.startAddress }}</p>
+                <div *ngIf="results !== undefined">
+      <p>{{ results!.startAddress }}</p>
       <p>|</p>
       <p>\/</p>
-      <p class="mb-2">{{ results.endAddress }}</p>
+                <p class="mb-2">{{ results!.endAddress }}</p>
       <p class="text-4xl text-primary mb-8">Results</p>
       <div class="result">
         <div class="collapse collapse-open border border-base-300 bg-base-200 mb-4" tabindex="0">
@@ -86,15 +87,15 @@
           </div>
           <div class="collapse-content">
             <div class="information">
-              <p>Time till destination with traffic {{ results.car.durationInTraffic.text }}</p>
-              <p>Losing time due to traffic {{ results.car.offsetTraffic.text }}</p>
+                <p>Time till destination with traffic {{ results?.car?.durationInTraffic?.text }}</p>
+              <p>Losing time due to traffic {{ results?.car?.offsetTraffic?.text }}</p>
             </div>
-          </div>
-        </div>
-        <div class="collapse collapse-open border border-base-300 bg-base-200" tabindex="0">
-          <div class="collapse-title text-xl font-medium">
+              </div>
+              </div>
+                <div class="collapse collapse-open border border-base-300 bg-base-200" tabindex="0">
+                <div class="collapse-title text-xl font-medium">
             <div class="result-info">
-              <div class="icon">
+                <div class="icon">
                 <svg fill="none" height="48px" viewBox="0 0 24 24" width="48px" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M8 14V15M16 14V15M5 11H12M19 11H12M6 21L8 18M16 18L18 21M12 6V11M12 6H5M12 6H19M5 6V16C5 17.1046 5.89543 18 7 18H17C18.1046 18 19 17.1046 19 16V6M5 6V6C5 4.34315 6.34315 3 8 3H16C17.6569 3 19 4.34315 19 6V6"
@@ -106,11 +107,29 @@
           </div>
           <div class="collapse-content">
             <div class="information">
-              <p>Time till destination {{ results.publicTransport.duration.text }}</p>
-              <p>Slower than car {{ results.publicTransport.offsetTraffic.text }}</p>
+              <p>Time till destination {{ results?.publicTransport?.duration?.text}}
+                </p>
+                <p>Slower than car {{ results?.publicTransport?.offsetTraffic?.text}}
+
+              </p>
               <a [href]="sbbDeepLink">SBB CRAZY</a>
             </div>
-          </div>
+
+        </div>
+                </div>
+        <div *ngIf="historyGraph !== undefined">
+          <apx-chart
+            [series]="historyGraph!.series"
+            [chart]="historyGraph!.chart"
+            [dataLabels]="historyGraph!.dataLabels"
+            [plotOptions]="historyGraph!.plotOptions"
+            [yaxis]="historyGraph!.yaxis"
+            [legend]="historyGraph!.legend"
+            [fill]="historyGraph!.fill"
+            [stroke]="historyGraph!.stroke"
+            [tooltip]="historyGraph!.tooltip"
+            [xaxis]="historyGraph!.xaxis"
+          ></apx-chart>
         </div>
       </div>
     </div>

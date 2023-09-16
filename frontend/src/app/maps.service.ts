@@ -21,16 +21,18 @@ export class MapsService {
   }
 
   async makeShitHappen(from: string, to: string): Promise<Route> {
+    let departureDate = new Date("18 Sep 2023 05:00:10 GMT");
     const [car, publicTransport, history, parkAndRide] = await Promise.all([
-      this.getRoutesCar(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
-      this.getRoutesPublic(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
-      this.getCarHistory(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
+      this.getRoutesCar(from, to, departureDate),
+      this.getRoutesPublic(from, to, departureDate),
+      this.getCarHistory(from, to, departureDate),
       this.getRoutesParkAndRide(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
     ]);
 
     console.log(history)
 
     return {
+      departure: departureDate,
       car: {
         ...car,
         offsetTraffic: this.secondsToDuration(car.durationInTraffic.value - car.duration.value)
@@ -62,7 +64,7 @@ export class MapsService {
 
   secondsToDuration(seconds: number): Duration {
     return {
-      text: formatDistance(0, seconds * 1000, {includeSeconds: true}),
+      text:  formatDistance(0, seconds * 1000, {includeSeconds: true}),
       value: seconds
     }
   }
@@ -87,9 +89,11 @@ export class MapsService {
       this.directionsService.route(request, function (response, status) {
         if (status !== 'OK') {
           reject(status);
+          return;
         }
         if (response.routes.length <= 0 || response.routes[0].legs.length <= 0) {
           reject('No routes found');
+          return;
         }
         console.log("get route: ", response);
 
@@ -121,9 +125,11 @@ export class MapsService {
       this.directionsService.route(request, function (response, status) {
         if (status !== 'OK') {
           reject(status);
+          return;
         }
         if (response.routes.length <= 0 || response.routes[0].legs.length <= 0) {
           reject('No routes found');
+          return;
         }
         console.log("get route: ", response);
 
@@ -182,9 +188,11 @@ export class MapsService {
       this.directionsService.route(requestDistanceToParkAndRide, function (response, status) {
         if (status !== 'OK') {
           reject(status);
+          return;
         }
         if (response.routes.length <= 0 || response.routes[0].legs.length <= 0) {
           reject('No routes found');
+          return;
         }
         console.log("get route: ", response);
 

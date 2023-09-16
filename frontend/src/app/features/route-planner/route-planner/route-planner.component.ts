@@ -1,6 +1,22 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Route, TimeType} from "../route";
+import {
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexDataLabels,
+  ApexFill,
+  ApexLegend,
+  ApexPlotOptions,
+  ApexStroke,
+  ApexTooltip,
+  ApexXAxis,
+  ApexYAxis
+} from "ng-apexcharts";
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
+import {ChartOptions} from "../chart-type";
+import {formatDistance} from "date-fns";
+
+
 
 @Component({
   selector: 'app-route-planner',
@@ -16,6 +32,7 @@ export class RoutePlannerComponent implements AfterViewInit {
   @Input() time: string;
   @Input() results?: Route = undefined;
   @Input() sbbDeepLink: string;
+  @Input() historyGraph?: ChartOptions;
 
   @Output() fromChanged = new EventEmitter<string>();
   @Output() toChanged = new EventEmitter<string>();
@@ -24,6 +41,7 @@ export class RoutePlannerComponent implements AfterViewInit {
   @Output() valueSwitchClicked = new EventEmitter<void>();
 
   @Output() analyzeClicked = new EventEmitter<void>();
+  protected readonly undefined = undefined;
 
   ngAfterViewInit(): void {
     const options: AutocompleteOptions = {
@@ -63,7 +81,7 @@ export class RoutePlannerComponent implements AfterViewInit {
   }
 
   calculateTrafficStatus() {
-    if (!this.results) {
+if (!this.results) {
       return '';
     }
 

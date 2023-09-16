@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {RoutePlannerContainerComponent} from './container/route-planner-container.component';
 import {RoutePlannerComponent} from './route-planner/route-planner.component';
 import {RouterModule} from "@angular/router";
+import {NgApexchartsModule} from "ng-apexcharts";
 
 const routes = [{path: '', component: RoutePlannerContainerComponent}];
 
@@ -14,6 +15,7 @@ const routes = [{path: '', component: RoutePlannerContainerComponent}];
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    NgApexchartsModule,
   ]
 })
 export class RoutePlannerModule {
