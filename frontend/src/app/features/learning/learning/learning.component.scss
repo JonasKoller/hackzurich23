@@ -1,0 +1,15 @@
+.hero {
+  border-radius: 12px;
+
+  &-content {
+    padding: 32px 16px;
+  }
+}
+
+.articles-grid {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
