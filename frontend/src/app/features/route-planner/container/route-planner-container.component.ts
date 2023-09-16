@@ -25,4 +25,11 @@ export class RoutePlannerContainerComponent {
   toChanged($event: string) {
     this.to = $event;
   }
+
+  switchValues() {
+    const oldFrom = this.from;
+    
+    this.from = this.to;
+    this.to = oldFrom;
+  }
 }

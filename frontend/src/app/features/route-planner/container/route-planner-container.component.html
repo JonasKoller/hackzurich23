@@ -1,2 +1,3 @@
-<app-route-planner (fromChanged)="fromChanged($event)" (toChanged)="toChanged($event)"
-                   [results]="results" (analyzeClicked)="analyze()"></app-route-planner>
+<app-route-planner (analyzeClicked)="analyze()" (fromChanged)="fromChanged($event)"
+                   (toChanged)="toChanged($event)" (valueSwitchClicked)="switchValues()"
+                   [results]="results"></app-route-planner>

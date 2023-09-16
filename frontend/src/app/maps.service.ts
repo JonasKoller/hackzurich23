@@ -40,6 +40,8 @@ export class MapsService {
         offsetTraffic: this.secondsToDuration(car.durationInTraffic.value - publicTransport.duration.value)
       },
       history,
+      startAddress: from,
+      endAddress: to,
       parkAndRide
     }
   }

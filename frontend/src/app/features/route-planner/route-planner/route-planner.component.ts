@@ -19,6 +19,7 @@ export class RoutePlannerComponent implements AfterViewInit {
   @Output() toChanged = new EventEmitter<string>();
   @Output() timeChanged = new EventEmitter<string>();
   @Output() timeTypeChanged = new EventEmitter<TimeType>();
+  @Output() valueSwitchClicked = new EventEmitter<void>();
 
   @Output() analyzeClicked = new EventEmitter<void>();
 
@@ -43,12 +44,19 @@ export class RoutePlannerComponent implements AfterViewInit {
   analyze() {
     document.getElementById('results')?.scrollIntoView({
       behavior: "smooth",
-      block: "start",
+      block: "center",
       inline: "nearest"
     });
 
     this.analyzeClicked.emit();
   }
 
-  protected readonly undefined = undefined;
+  valueSwitch() {
+    const oldFrom = this.fromInputHtmlElement.nativeElement.value
+
+    this.fromInputHtmlElement.nativeElement.value = this.toInputHtmlElement.nativeElement.value;
+    this.toInputHtmlElement.nativeElement.value = oldFrom;
+
+    this.valueSwitchClicked.emit();
+  }
 }
