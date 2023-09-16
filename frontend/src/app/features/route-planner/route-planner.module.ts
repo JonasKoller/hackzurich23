@@ -4,7 +4,7 @@ import {RoutePlannerContainerComponent} from './container/route-planner-containe
 import {RoutePlannerComponent} from './route-planner/route-planner.component';
 import {RouterModule} from "@angular/router";
 
-const routes = [{path: '', component: RoutePlannerComponent}];
+const routes = [{path: '', component: RoutePlannerContainerComponent}];
 
 @NgModule({
   declarations: [

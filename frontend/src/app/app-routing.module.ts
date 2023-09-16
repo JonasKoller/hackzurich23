@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/route-planner/route-planner.module').then((m) => m.RoutePlannerModule),
   },
   {
+    path: 'learning',
+    loadChildren: () => import('./features/learning/learning.module').then((m) => m.LearningModule),
+  },
+  {
     path: '**',
     redirectTo: 'route-planner',
   },
