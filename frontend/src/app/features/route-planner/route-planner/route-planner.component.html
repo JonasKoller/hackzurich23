@@ -52,14 +52,15 @@
       <p class="text-4xl text-primary mb-8">Results</p>
       <div class="result">
         <p>Car</p>
-        <p>Time till destination {{ results.car.durationInTraffic.value / 60 }} min</p>
-        <p>Losing time due to traffic {{ (results.car.durationInTraffic.value - results.car.duration.value) / 60 }}
-          min</p>
+        <p>Time till destination no traffic {{ results.car.duration.text }}</p>
+        <p>Time till destination with traffic {{ results.car.durationInTraffic.text }}</p>
+        <p>Losing time due to traffic {{ (results.car.offsetTraffic.text }}</p>
       </div>
       <div class="divider"></div>
       <div class="result">
         <p>Public Transport</p>
         <p>Time till destination {{ results.publicTransport.duration.value / 60 }} min</p>
+        <p>Slower than car {{ results.publicTransport.offsetTraffic.text }}</p>
       </div>
       <div class="divider"></div>
     </div>

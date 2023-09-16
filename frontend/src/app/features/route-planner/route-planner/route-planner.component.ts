@@ -50,4 +50,6 @@ export class RoutePlannerComponent implements AfterViewInit {
 
     this.analyzeClicked.emit();
   }
+
+  protected readonly undefined = undefined;
 }
