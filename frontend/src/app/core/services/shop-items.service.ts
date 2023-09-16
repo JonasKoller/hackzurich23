@@ -13,7 +13,7 @@ export class ShopItemsService {
   }
 
   getAllShopItems(): Observable<ShopItem[]> {
-    return this.http.get<ShopItem[]>('https://hz-traffix.web.app/assets/mock/shop-items.json');
+    return this.http.get<ShopItem[]>('http://localhost:4200/assets/mock/shop-items.json');
   }
 
   isOneTimeBought(id: number): boolean {

@@ -21,6 +21,7 @@ export class RoutePlannerComponent implements AfterViewInit {
   @Input() sbbDeepLink: string;
   @Input() carDeepLink: string;
   @Input() historyGraph?: ChartOptions;
+  @Input() isLoading: boolean;
 
   @Output() fromChanged = new EventEmitter<string>();
   @Output() toChanged = new EventEmitter<string>();

@@ -1,1 +1,2 @@
-<app-shop (buyItemClicked)="buyShopItem($event)" [points]="points" [shopItems]="shopItems$ | async"></app-shop>
+<app-shop (buyItemClicked)="buyShopItem($event)" [isLoading]="isLoading" [points]="points"
+          [shopItems]="shopItems$ | async"></app-shop>

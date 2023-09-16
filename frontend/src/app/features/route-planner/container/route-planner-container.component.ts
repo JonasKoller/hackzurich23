@@ -13,6 +13,7 @@ export class RoutePlannerContainerComponent {
   historyChart?: ChartOptions = undefined;
   from: string = '';
   to: string = '';
+  isLoading: boolean = false;
   time: string = format(Date.now(), 'HH:mm');
   timeType: TimeType = TimeType.DEPARTURE;
 
@@ -21,6 +22,7 @@ export class RoutePlannerContainerComponent {
   }
 
   async analyze() {
+    this.isLoading = true;
     this.results = await this.mapsService.makeShitHappen(this.from, this.to, this.time, this.timeType);
     this.historyChart = {
       series: [
@@ -85,6 +87,7 @@ export class RoutePlannerContainerComponent {
         }
       }
     };
+    this.isLoading = false;
   }
 
   fromChanged($event: string) {

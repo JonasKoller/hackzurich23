@@ -9,6 +9,7 @@ import {ShopItemsService} from "../../../core/services/shop-items.service";
 })
 export class ShopContainerComponent implements OnInit {
   points: number = 0;
+  isLoading = true;
   shopItems$: Observable<any> | null = null;
 
   constructor(private pointsService: PointsService, private shopItemsService: ShopItemsService) {
@@ -17,6 +18,7 @@ export class ShopContainerComponent implements OnInit {
   ngOnInit(): void {
     this.points = this.pointsService.getPoints();
     this.shopItems$ = this.shopItemsService.getAllShopItems();
+    this.isLoading = false;
   }
 
   buyShopItem(buy: any) {

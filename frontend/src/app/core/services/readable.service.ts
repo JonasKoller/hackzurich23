@@ -14,7 +14,7 @@ export class ReadableService {
   }
 
   getAllReadables(): Observable<Article[]> {
-    return this.http.get<Article[]>('https://hz-traffix.web.app/assets/mock/readables.json');
+    return this.http.get<Article[]>('http://localhost:4200/assets/mock/readables.json');
   }
 
   addArticlesRead(id: number) {

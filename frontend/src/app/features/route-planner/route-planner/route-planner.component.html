@@ -51,8 +51,15 @@
       </div>
     </div>
   </div>
-  <div class="mini-constrainer">
-    <div *ngIf="results !== undefined" class="alert alert-info">
+  <div *ngIf="isLoading" class="loading-bar">
+    <span class="loading loading-bars loading-lg"></span>
+  </div>
+  <div *ngIf="results === undefined && !isLoading" class="search-img">
+    <p class="text-2xl">Start you journey now!</p>
+    <img alt="Search image" src="/assets/images/search.svg">
+  </div>
+  <div *ngIf="results !== undefined && !isLoading" class="mini-constrainer">
+    <div class="alert alert-info">
       <svg class="stroke-current shrink-0 w-6 h-6" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
               stroke-linejoin="round"
@@ -62,12 +69,7 @@
     </div>
   </div>
   <div class="mini-constrainer" id="results">
-
-    <div *ngIf="results === undefined" class="search-img">
-      <p class="text-2xl">Start you journey now!</p>
-      <img alt="Search image" src="/assets/images/search.svg">
-    </div>
-    <div *ngIf="results !== undefined">
+    <div *ngIf="results !== undefined && !isLoading">
       <p>{{ results!.startAddress }}</p>
       <div>
         <svg fill="none" height="36px" viewBox="0 0 24 24" width="36px" xmlns="http://www.w3.org/2000/svg">
