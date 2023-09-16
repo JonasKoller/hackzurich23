@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.constrainer {
+  margin: 0 16px 0;
+
+  @media (min-width: 800px) {
+    margin: 0 32px 0;
+  }
+
+  @media (min-width: 1024px) {
+    margin: 0 140px 0;
+  }
+
+  @media (min-width: 1440px) {
+    margin: 0 96px 0;
+  }
+
+  @media screen and (min-width: 1500px) {
+    width: 1248px;
+    margin: 0 auto 0;
+  }
+}
+
+.mini-constrainer {
+  margin: 32px 0;
+
+  @media (min-width: 800px) {
+    margin: 48px 0;
+  }
+
+  @media (min-width: 1024px) {
+    margin: 64px 0;
+  }
+
+  @media (min-width: 1440px) {
+    margin: 96px 0;
+  }
+}
