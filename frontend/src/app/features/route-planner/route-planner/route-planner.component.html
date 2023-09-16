@@ -4,20 +4,21 @@
          style="background-image: url(https://static.az-cdn.ch/__ip/SKY3b0GQ-fD5VQSpil-M-TdICmA/1aa6f0c38d4e4703bc0eb8a6e2e8b6d3a497535f/remote.adjust.rotate=0&remote.size.w=1024&remote.size.h=768&local.crop.h=576&local.crop.w=1024&local.crop.x=0&local.crop.y=46&r=1&focus.x=512&focus.y=334,n-ch12-16x9-far);">
       <div class="hero-overlay bg-opacity-70"></div>
       <div class="hero-content flex-col lg:flex-row-reverse text-neutral-content">
-        <div class="text-center lg:text-left">
+        <div class="text-center lg:text-left text-content">
           <h1 class="text-5xl font-bold">Search now</h1>
           <p class="py-6">For an efficient and seamless experience, please take a moment to accurately enter all the
             relevant details of your trip into the designated form, ensuring no information is overlooked.</p>
         </div>
-        <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div class="card flex-shrink-0 w-full shadow-2xl bg-base-100">
           <div class="card-body">
             <div class="form-wrap">
               <div class="form-elements">
                 <div class="form-control">
-                  <input #fromInput class="input input-bordered input-primary" placeholder="From" type="text"/>
+                  <input #fromInput class="input input-bordered input-primary input-width" placeholder="From"
+                         type="text"/>
                 </div>
                 <div class="form-control">
-                  <input #toInput class="input input-bordered input-primary" placeholder="To" type="text"/>
+                  <input #toInput class="input input-bordered input-primary input-width" placeholder="To" type="text"/>
                 </div>
               </div>
               <button class="btn btn-circle btn-outline btn-primary">
@@ -28,24 +29,39 @@
               </button>
             </div>
             <div class="form-control">
-              <input (change)="timeChangedEvent($event)" class="input input-bordered input-primary"
-                     placeholder="Start Time"
+              <input (change)="timeChangedEvent($event)" class="input input-bordered input-primary input-width"
+                     placeholder="Time"
                      type="time"/>
             </div>
-            <div class="form-control">
-              <input class="input input-bordered input-primary" placeholder="Arrival Time" type="time"/>
+            <div class="form-control w-52">
+              <label class="cursor-pointer label label-time">
+                <span class="label-text">Start</span>
+                <input class="toggle toggle-accent" type="checkbox"/>
+              </label>
             </div>
             <div class="form-control mt-6">
               <button (click)="analyze()" class="btn btn-primary">Analyze Trip</button>
             </div>
           </div>
-          <div id="results">
-            <div *ngIf="results !== undefined">
-              {{results | json}}
-            </div>
-          </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="mini-constrainer" id="results">
+    <div *ngIf="results !== undefined">
+      <p class="text-4xl text-primary mb-8">Results</p>
+      <div class="result">
+        <p>Car</p>
+        <p>Time till destination {{ results.car.durationInTraffic.value / 60 }} min</p>
+        <p>Losing time due to traffic {{ (results.car.durationInTraffic.value - results.car.duration.value) / 60 }}
+          min</p>
+      </div>
+      <div class="divider"></div>
+      <div class="result">
+        <p>Public Transport</p>
+        <p>Time till destination {{ results.publicTransport.duration.value / 60 }} min</p>
+      </div>
+      <div class="divider"></div>
     </div>
   </div>
 </div>

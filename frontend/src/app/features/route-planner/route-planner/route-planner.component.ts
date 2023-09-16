@@ -21,6 +21,7 @@ export class RoutePlannerComponent implements AfterViewInit {
   @Output() timeTypeChanged = new EventEmitter<TimeType>();
 
   @Output() analyzeClicked = new EventEmitter<void>();
+  protected readonly undefined = undefined;
 
   ngAfterViewInit(): void {
     const options: AutocompleteOptions = {
@@ -43,7 +44,7 @@ export class RoutePlannerComponent implements AfterViewInit {
   analyze() {
     document.getElementById('results')?.scrollIntoView({
       behavior: "smooth",
-      block: "start",
+      block: "center",
       inline: "nearest"
     });
 
