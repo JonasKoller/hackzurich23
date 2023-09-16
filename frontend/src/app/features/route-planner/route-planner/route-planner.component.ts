@@ -61,6 +61,17 @@ export class RoutePlannerComponent implements AfterViewInit {
   }
 
   calculateTrafficStatus() {
-    
+    if (!this.results) {
+      return '';
+    }
+
+    const percentage = (this.results.car.offsetTraffic.value / this.results.car.durationInTraffic.value) * 100;
+    if (percentage <= 5) {
+      return 'Low traffic';
+    } else if (percentage <= 25) {
+      return 'Medium traffic';
+    } else {
+      return 'High traffic';
+    }
   }
 }
