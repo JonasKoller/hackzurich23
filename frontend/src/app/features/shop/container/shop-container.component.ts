@@ -20,6 +20,14 @@ export class ShopContainerComponent implements OnInit {
   }
 
   buyShopItem(shopItem: any) {
+    if (this.shopItemsService.isOneTimeBought(shopItem.id)) {
+      return;
+    }
+
+    if (shopItem.classification === 'One Time only') {
+      this.shopItemsService.setOneTimeOnlyBuyed(shopItem);
+    }
+
     this.pointsService.subPoint(shopItem.price);
     this.points = this.pointsService.getPoints();
   }

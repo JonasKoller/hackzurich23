@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {ShopItemsService} from "../../../core/services/shop-items.service";
 
 @Component({
   selector: 'app-shop',
@@ -9,6 +10,9 @@ export class ShopComponent {
   @Input() points: number;
   @Input() shopItems: any;
   @Output() buyItemClicked = new EventEmitter<any>();
+
+  constructor(private shopItemsService: ShopItemsService) {
+  }
 
   sortByBuyingPower() {
     if (!this.shopItems) {
@@ -30,5 +34,9 @@ export class ShopComponent {
 
   buyItem(shopItem: any) {
     this.buyItemClicked.emit(shopItem);
+  }
+
+  isOneTimeBought(id: number) {
+    return this.shopItemsService.isOneTimeBought(id);
   }
 }
