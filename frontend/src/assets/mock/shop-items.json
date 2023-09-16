@@ -4,83 +4,95 @@
     "itemName": "Coupon for 10% off Swiss Car Vignette",
     "price": 500,
     "description": "Save on your Swiss road travels with a 10% discount on a car vignette.",
-    "image": "https://vignetteshop.ch/wp-content/themes/vignetics/img/vignette-suisse-2023.svg"
+    "image": "https://vignetteshop.ch/wp-content/themes/vignetics/img/vignette-suisse-2023.svg",
+    "classification": "One Time only"
   },
   {
     "id": 2,
     "itemName": "Car Snowbrush",
     "price": 300,
     "description": "Effortlessly clear snow from your vehicle with this durable car snowbrush.",
-    "image": "https://cdn.thewirecutter.com/wp-content/uploads/2019/02/icescraper-lowres-0208.jpg"
+    "image": "https://cdn.thewirecutter.com/wp-content/uploads/2019/02/icescraper-lowres-0208.jpg",
+    "classification": ""
   },
   {
     "id": 3,
     "itemName": "Coupon for 20% off on Fuel",
     "price": 800,
     "description": "Drive more, spend less with a 20% discount on your next fuel purchase.",
-    "image": "https://t4.ftcdn.net/jpg/00/63/83/29/360_F_63832924_PE0b9gQltaKya7t6mIQLWat5ob0KcuXr.jpg"
+    "image": "https://t4.ftcdn.net/jpg/00/63/83/29/360_F_63832924_PE0b9gQltaKya7t6mIQLWat5ob0KcuXr.jpg",
+    "classification": "One Time only"
   },
   {
     "id": 4,
     "itemName": "Car First Aid Kit",
     "price": 350,
     "description": "Stay prepared for emergencies with a comprehensive car first aid kit.",
-    "image": "https://www.gosupps.com/media/catalog/product/A/1/A1bbR1c_YgL.jpg"
+    "image": "https://www.gosupps.com/media/catalog/product/A/1/A1bbR1c_YgL.jpg",
+    "classification": "New"
   },
   {
     "id": 5,
     "itemName": "Car Air Freshener",
     "price": 150,
     "description": "Keep your car smelling fresh and pleasant with our premium air freshener.",
-    "image": "https://images.thdstatic.com/productImages/f2931125-8276-4575-9bea-da51830ec378/svn/blue-little-trees-car-air-fresheners-u3s-32089-31_600.jpg"
+    "image": "https://images.thdstatic.com/productImages/f2931125-8276-4575-9bea-da51830ec378/svn/blue-little-trees-car-air-fresheners-u3s-32089-31_600.jpg",
+    "classification": ""
   },
   {
     "id": 6,
     "itemName": "Dashboard Sunshade",
     "price": 400,
     "description": "Protect your car's interior from harsh sunlight with our foldable dashboard sunshade.",
-    "image": "https://thumbor.forbes.com/thumbor/fit-in/x/https://www.forbes.com/home-improvement/wp-content/uploads/2023/06/Best-Car-Sunshades-For-2023-e1687157464609.jpg"
+    "image": "https://thumbor.forbes.com/thumbor/fit-in/x/https://www.forbes.com/home-improvement/wp-content/uploads/2023/06/Best-Car-Sunshades-For-2023-e1687157464609.jpg",
+    "classification": ""
   },
   {
     "id": 7,
     "itemName": "Leather Seat Cleaner",
     "price": 450,
     "description": "Maintain the pristine condition of your leather seats with our specialized cleaner.",
-    "image": "https://m.media-amazon.com/images/I/41nFmg9EMdL._SL500_.jpg"
+    "image": "https://m.media-amazon.com/images/I/41nFmg9EMdL._SL500_.jpg",
+    "classification": ""
   },
   {
     "id": 8,
     "itemName": "Tire Pressure Gauge",
     "price": 250,
     "description": "Ensure optimal tire pressure for safer drives and improved fuel efficiency.",
-    "image": "https://cdn.motor1.com/images/custom/m1-gauges-intercomp2.jpg"
+    "image": "https://cdn.motor1.com/images/custom/m1-gauges-intercomp2.jpg",
+    "classification": ""
   },
   {
     "id": 9,
     "itemName": "Portable Car Vacuum",
     "price": 600,
     "description": "Clean up crumbs, dust, and dirt on-the-go with our powerful portable car vacuum.",
-    "image": "https://www.zdnet.com/a/img/resize/a06e3c115bfb5e8b6ce1457eaedc1712ee264525/2022/06/24/7bed6850-9bcd-478b-9341-3b720832e069/car-vacuum-2.jpg?auto=webp&fit=crop&height=900&width=1200"
+    "image": "https://www.zdnet.com/a/img/resize/a06e3c115bfb5e8b6ce1457eaedc1712ee264525/2022/06/24/7bed6850-9bcd-478b-9341-3b720832e069/car-vacuum-2.jpg?auto=webp&fit=crop&height=900&width=1200",
+    "classification": "New"
   },
   {
     "id": 10,
     "itemName": "Steering Wheel Cover",
     "price": 300,
     "description": "Enhance driving comfort and grip with our stylish and ergonomic steering wheel cover.",
-    "image": "https://i.ebayimg.com/images/g/3bQAAOSweopisAJ~/s-l1600.jpg"
+    "image": "https://i.ebayimg.com/images/g/3bQAAOSweopisAJ~/s-l1600.jpg",
+    "classification": ""
   },
   {
     "id": 11,
     "itemName": "Jump Start Power Pack",
     "price": 750,
     "description": "Never be left stranded with our compact jump start power pack, perfect for emergency battery boosts.",
-    "image": "https://typesauto.com/cdn/shop/products/AC530013-1-HeroBanner_r3-img2_8650b446-fbb3-44cf-9a9f-1ae42a2a7856_700x.jpg?v=1625720220"
+    "image": "https://typesauto.com/cdn/shop/products/AC530013-1-HeroBanner_r3-img2_8650b446-fbb3-44cf-9a9f-1ae42a2a7856_700x.jpg?v=1625720220",
+    "classification": ""
   },
   {
     "id": 12,
     "itemName": "Car Phone Holder",
     "price": 200,
     "description": "Navigate and drive safely with our sturdy car phone holder, ensuring hands-free convenience.",
-    "image": "https://w2f2z6e6.stackpathcdn.com/photos/34/96/471115_3257_XXL.jpg"
+    "image": "https://w2f2z6e6.stackpathcdn.com/photos/34/96/471115_3257_XXL.jpg",
+    "classification": ""
   }
 ]

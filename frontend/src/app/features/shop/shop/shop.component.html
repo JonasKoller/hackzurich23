@@ -28,9 +28,14 @@
         <div class="card w-96 bg-base-100 shadow-xl">
           <figure><img [src]="shopItem.image" alt="Shop Item"/></figure>
           <div class="card-body">
-            <h2 class="card-title">{{ shopItem.itemName }}</h2>
+            <h2 class="card-title">
+              {{ shopItem.itemName }}
+            </h2>
             <p>{{ shopItem.description }}</p>
             <p class="text-xl text-secondary">{{ shopItem.price }} Coins</p>
+            <span *ngIf="shopItem.classification"
+                  [ngClass]="{ 'badge-error': shopItem.classification === 'One Time only', 'badge-accent': shopItem.classification === 'New' }"
+                  class="badge">{{ shopItem.classification }}</span>
             <div class="card-actions justify-end">
               <button class="btn btn-primary">Buy Now</button>
             </div>
