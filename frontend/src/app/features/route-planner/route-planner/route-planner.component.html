@@ -21,25 +21,27 @@
                   <input #toInput class="input input-bordered input-primary input-width" placeholder="To" type="text"/>
                 </div>
               </div>
-              <button (click)="valueSwitch()" class="btn btn-circle btn-outline btn-primary">
+              <button (click)="valueSwitch()" class="btn btn-circle btn-outline btn-secondary">
                 <svg fill="none" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
                   <path d="M10 6L7 3M7 3L4 6M7 3V17M14 18L17 21M17 21L20 18M17 21V7" stroke="currentColor"
                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                 </svg>
               </button>
             </div>
-            <div class="form-control">
-              <input (change)="timeChangedEvent($event)"
-                     [value]="time"
-                     class="input input-bordered input-primary input-width"
-                     placeholder="Time"
-                     type="time"/>
-            </div>
-            <div class="form-control w-52">
-              <label class="cursor-pointer label label-time">
-                <span class="label-text">Start</span>
-                <input class="toggle toggle-accent" type="checkbox"/>
-              </label>
+            <div class="time-wrap">
+              <div class="form-control time-control">
+                <input (change)="timeChangedEvent($event)"
+                       [value]="time"
+                       class="input input-bordered input-primary input-width"
+                       placeholder="Time"
+                       type="time"/>
+              </div>
+              <div class="form-control">
+                <label class="cursor-pointer label label-time">
+                  <span class="label-text">Start</span>
+                  <input class="toggle toggle-secondary" type="checkbox"/>
+                </label>
+              </div>
             </div>
             <div class="form-control mt-6">
               <button (click)="analyze()" class="btn btn-primary">Analyze Trip</button>
@@ -105,32 +107,36 @@
                     stroke="#302E80" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                 </svg>
               </div>
-              <div class="badge badge-success">Recommended</div>
+              <div
+                [ngClass]="{'badge-success' : calculateTrainRecomendation() === 'Recommended', 'badge-info' : calculateTrainRecomendation() === 'Neutral', 'badge-error' : calculateTrainRecomendation() === 'Not Recommended'}"
+                class="badge">{{ calculateTrainRecomendation() }}</div>
             </div>
           </div>
           <div class="collapse-content">
             <div class="information">
               <p>Time till destination {{ results?.publicTransport?.duration?.text}}
               </p>
-              <p>Slower than car {{ results?.publicTransport?.offsetTraffic?.text}}
+              <p>{{ getTrainAgainstCar() >= 0 ? 'Slower' : 'Faster' }}
+                than car {{ results?.publicTransport?.offsetTraffic?.text}}
 
               </p>
               <a [href]="sbbDeepLink">SBB CRAZY</a>
             </div>
+
           </div>
         </div>
         <div *ngIf="historyGraph !== undefined">
           <apx-chart
-            [series]="historyGraph!.series"
             [chart]="historyGraph!.chart"
             [dataLabels]="historyGraph!.dataLabels"
-            [plotOptions]="historyGraph!.plotOptions"
-            [yaxis]="historyGraph!.yaxis"
-            [legend]="historyGraph!.legend"
             [fill]="historyGraph!.fill"
+            [legend]="historyGraph!.legend"
+            [plotOptions]="historyGraph!.plotOptions"
+            [series]="historyGraph!.series"
             [stroke]="historyGraph!.stroke"
             [tooltip]="historyGraph!.tooltip"
             [xaxis]="historyGraph!.xaxis"
+            [yaxis]="historyGraph!.yaxis"
           ></apx-chart>
         </div>
       </div>
