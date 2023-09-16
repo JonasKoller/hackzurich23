@@ -1,8 +1,8 @@
 // noinspection ES6UnusedImports
 import {} from 'googlemaps';
 import {Injectable} from '@angular/core';
-import {Route} from "./features/route-planner/route";
-import {add, formatDistance, sub} from 'date-fns'
+import {Route, TimeType} from "./features/route-planner/route";
+import {add, addMinutes, formatDistance, setHours, setMinutes, sub, subSeconds} from 'date-fns'
 import DirectionsRequest = google.maps.DirectionsRequest;
 import TrafficModel = google.maps.TrafficModel;
 import Duration = google.maps.Duration;
@@ -20,19 +20,27 @@ export class MapsService {
   constructor() {
   }
 
-  async makeShitHappen(from: string, to: string): Promise<Route> {
-    let departureDate = new Date("18 Sep 2023 05:00:10 GMT");
+  async makeShitHappen(from: string, to: string, time: string, timeType: TimeType): Promise<Route> {
+    // get common travel time
+    // Substract common time from arival time
+    console.log('ALARM! 2 ' + time);
+    let dateAndTime = this.transferTimeToCurrentDateAndTime(time);
+    dateAndTime = addMinutes(dateAndTime, 3);
+
+    console.log('TimeType ' + timeType);
+    console.log('DateAndTime ' + dateAndTime);
+
+    // getCarHistory --> do dateAndTime - 30min
+
     const [car, publicTransport, history, parkAndRide] = await Promise.all([
-      this.getRoutesCar(from, to, departureDate),
-      this.getRoutesPublic(from, to, departureDate),
-      this.getCarHistory(from, to, departureDate),
-      this.getRoutesParkAndRide(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
+      this.getRoutesCar(from, to, dateAndTime),
+      this.getRoutesPublic(from, to, dateAndTime),
+      this.getCarHistory(from, to, dateAndTime),
+      this.getRoutesParkAndRide(from, to, dateAndTime),
     ]);
 
-    console.log(history)
-
     return {
-      departure: departureDate,
+      departure: dateAndTime,
       car: {
         ...car,
         offsetTraffic: this.secondsToDuration(car.durationInTraffic.value - car.duration.value)
@@ -48,10 +56,23 @@ export class MapsService {
     }
   }
 
+  private async departureTimeToArivalTime(from: string, to: string, time: Date): Promise<Date> {
+    let routesCar = await this.getRoutesCar(from, to, time);
+    let durationForStandardTransport = routesCar.duration.value;
+    return subSeconds(time, durationForStandardTransport);
+  }
+
+  private transferTimeToCurrentDateAndTime(time: string): Date {
+    let timeSplit = time.split(':');
+    let dateAndTime: Date = new Date(Date.now());
+    dateAndTime = setHours(dateAndTime, Number(timeSplit[0]));
+    dateAndTime = setMinutes(dateAndTime, Number(timeSplit[1]));
+    return new Date(dateAndTime);
+  }
+
   async getCarHistory(from: string, to: string, startDate: Date) {
-    const first = sub(startDate, {hours: 1});
     const promises = Array
-      .from({length: 13}, (_, i) => add(first, {minutes: i * 10}))
+      .from({length: 13}, (_, i) => add(startDate, {minutes: i * 10}))
       .map(async date => ({drive: await this.getRoutesCar(from, to, date), date}));
     const drives = await Promise.all(promises);
     return drives.map(({drive, date}) => {

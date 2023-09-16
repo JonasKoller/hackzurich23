@@ -22,7 +22,7 @@ export class RoutePlannerContainerComponent {
   }
 
   async analyze() {
-    this.results = await this.mapsService.makeShitHappen(this.from, this.to);
+    this.results = await this.mapsService.makeShitHappen(this.from, this.to, this.time, this.timeType);
     this.historyChart  = {
       series: [
         {
@@ -55,19 +55,19 @@ export class RoutePlannerContainerComponent {
       legend: {},
       xaxis: {
         categories: [
-          "-60min",
-          "-50min",
-          "-40min",
-          "-30min",
-          "-20min",
-          "-10min",
-          "desired",
+          "Departure Time",
           "+10min",
           "+20min",
           "+30min",
           "+40min",
           "+50min",
-          "+60min"
+          "+1h",
+          "+1h 10min",
+          "+1h 20min",
+          "+1h 30min",
+          "+1h 40min",
+          "+1h 50min",
+          "+2h"
         ]
       },
       yaxis: {
@@ -90,10 +90,12 @@ export class RoutePlannerContainerComponent {
 
   fromChanged($event: string) {
     this.from = $event;
+    this.removeSwitzerlandSuffix();
   }
 
   toChanged($event: string) {
     this.to = $event;
+    this.removeSwitzerlandSuffix();
   }
 
   switchValues() {
@@ -114,9 +116,17 @@ export class RoutePlannerContainerComponent {
 
   timeChanged($event: string) {
     this.time = $event;
+    console.log('ALARM! ' + this.time);
   }
 
   createCarDeepLink():string {
     return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(this.from)}&destination=${encodeURIComponent(this.to)}&travelmode=driving&dir_action=navigate`;
+  }
+
+  removeSwitzerlandSuffix() {
+    this.to = this.to.replace(', Switzerland', '');
+    this.to = this.to.replace(', Schweiz', '');
+    this.from = this.from.replace(', Switzerland', '');
+    this.from = this.from.replace(', Schweiz', '');
   }
 }
