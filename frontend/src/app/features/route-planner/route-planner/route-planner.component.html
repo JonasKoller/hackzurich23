@@ -41,8 +41,26 @@
           </div>
           <div id="results">
             <div *ngIf="results !== undefined">
-              {{results | json}}
-            </div>
+              <div>
+            Auto
+                <br>
+            ZeitOhneStau: {{results!.car.duration.text}}
+                <br>
+            ZeitMitStau: {{results!.car.durationInTraffic.text}}
+                <br>
+Längsemer mit Stau: {{results!.car.offsetTraffic.text}}
+                <br>
+          </div>
+          <div>
+            öv
+            <br>
+            Zeit: {{results!.publicTransport.duration.text}}
+            <br>
+            Längsemer gegenüber auto mit stau: {{results!.publicTransport.offsetTraffic.text}}
+
+          </div>
+          {{results | json}}
+        </div>
           </div>
         </div>
       </div>
