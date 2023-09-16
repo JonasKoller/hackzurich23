@@ -16,11 +16,13 @@ export class MapsService {
   }
 
   async makeShitHappen(from: string, to: string): Promise<Route> {
-    const [car, publicTransport] = await Promise.all([
+    const [car, publicTransport, parkAndRide] = await Promise.all([
       this.getRoutesCar(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
       this.getRoutesPublic(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
-    ])
+      this.getRoutesParkAndRide(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
+    ]);
 
+    console.log(parkAndRide);
     return {car, publicTransport}
   }
 
@@ -65,6 +67,37 @@ export class MapsService {
     var request: DirectionsRequest = {
       origin: start,
       destination: end,
+      // Note that JavaScript allows us to access the constant
+      // using square brackets and a string value as its
+      // "property."
+      travelMode: google.maps.TravelMode.TRANSIT,
+      drivingOptions: {
+        departureTime: date,
+        trafficModel: TrafficModel.BEST_GUESS
+      }
+    };
+    return new Promise((resolve, reject) => {
+      this.directionsService.route(request, function (response, status) {
+        if (status !== 'OK') {
+          reject(status);
+        }
+        if (response.routes.length <= 0 || response.routes[0].legs.length <= 0) {
+          reject('No routes found');
+        }
+        console.log("get route: ", response);
+
+        const aa = {
+          duration: response.routes[0].legs[0].duration,
+        };
+        resolve(aa);
+      });
+    });
+  }
+
+  getRoutesParkAndRide(start: string, end: string, date: Date) {
+    var request: DirectionsRequest = {
+      origin: start,
+      destination: "SBB P+Rail",
       // Note that JavaScript allows us to access the constant
       // using square brackets and a string value as its
       // "property."
