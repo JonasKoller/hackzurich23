@@ -8,7 +8,8 @@ export interface Route {
     duration: Duration,
     offsetTraffic: Duration,
   };
-  history: {date: Date, durationInTraffic: Duration}[]
+  history: {date: Date, durationInTraffic: Duration}[],
+  parkAndRide: Duration
 }
 
 interface Duration {
