@@ -2,10 +2,11 @@
 import {} from 'googlemaps';
 import {Injectable} from '@angular/core';
 import {Route} from "./features/route-planner/route";
-import {formatDistance} from 'date-fns'
+import {add, formatDistance, sub} from 'date-fns'
 import DirectionsRequest = google.maps.DirectionsRequest;
 import TrafficModel = google.maps.TrafficModel;
 import Duration = google.maps.Duration;
+import {hi} from "date-fns/locale";
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,14 @@ export class MapsService {
   }
 
   async makeShitHappen(from: string, to: string): Promise<Route> {
-    const [car, publicTransport] = await Promise.all([
+    const [car, publicTransport, history] = await Promise.all([
       this.getRoutesCar(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
       this.getRoutesPublic(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
+      this.getCarHistory(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
       // this.getRoutesParkAndRide(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
     ]);
+
+    console.log(history)
 
     return {
       car: {
@@ -32,10 +36,24 @@ export class MapsService {
         ...publicTransport,
         offsetTraffic: this.secondsToDuration(car.durationInTraffic.value - publicTransport.duration.value)
       },
+      history,
       startAddress: from,
       endAddress: to,
-
     }
+  }
+
+  async getCarHistory(from: string, to: string, startDate: Date) {
+    const first = sub(startDate, {hours: 1});
+    const promises = Array
+      .from({length: 13}, (_, i) => add(first, {minutes: i * 10}))
+      .map(async date => ({drive: await this.getRoutesCar(from, to, date), date}));
+    const drives = await Promise.all(promises);
+    return drives.map(({drive, date}) => {
+      return {
+        date: date,
+        durationInTraffic: drive.durationInTraffic,
+      }
+    })
   }
 
   secondsToDuration(seconds: number): Duration {
