@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {ReadableService} from "../../../core/services/readable.service";
 import {ActivatedRoute} from "@angular/router";
-import {Article} from "../../article";
+import {Article} from "../../../core/types/article";
 import {PointsService} from "../../../core/services/points.service";
 
 @Component({

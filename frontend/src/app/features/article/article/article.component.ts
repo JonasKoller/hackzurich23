@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Article} from "../../article";
+import {Article} from "../../../core/types/article";
 
 @Component({
   selector: 'app-article',

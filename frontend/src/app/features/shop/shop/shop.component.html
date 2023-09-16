@@ -1,7 +1,42 @@
 <div class="constrainer">
+  <div class="mini-constrainer">
+    <div class="hero bg-primary">
+      <div class="hero-content text-center text-neutral-content">
+        <div class="max-w-md">
+          <h1 class="text-5xl font-bold">You collect and you win</h1>
+          <p class="py-6">
+            In our online realm, every challenge you conquer and every milestone you reach is rewarded with shimmering
+            digital coins. But these aren't just mere points; they're your gateway to tangible rewards in the real
+            world. As your collection grows, a visit to our virtual shop offers an enticing array of car-related
+            goodies. From exclusive discounts on premium auto accessories to coveted coupons for car vignettes, your
+            digital achievements translate to real-world car benefits. So, as you game, remember: every coin earned is a
+            step closer to enhancing your driving experience.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="points text-xl">
     You have
     <div *ngIf="points > 0" class="badge badge-success gap-2 badge-lg">{{ points }}</div>
-    <span *ngIf="points <= 0">no </span> points!
+    <span *ngIf="points <= 0">no </span> points! <span *ngIf="points > 0">Have fun spending.</span>
+  </div>
+  <div class="mini-constrainer">
+    <p class="text-4xl text-primary">Products</p>
+    <div class="items-grid">
+      <ng-container *ngFor="let shopItem of shopItems">
+        <div class="card w-96 bg-base-100 shadow-xl">
+          <figure><img [src]="shopItem.image" alt="Shop Item"/></figure>
+          <div class="card-body">
+            <h2 class="card-title">{{ shopItem.itemName }}</h2>
+            <p>{{ shopItem.description }}</p>
+            <p class="text-xl text-secondary">{{ shopItem.price }} Coins</p>
+            <div class="card-actions justify-end">
+              <button class="btn btn-primary">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
   </div>
 </div>

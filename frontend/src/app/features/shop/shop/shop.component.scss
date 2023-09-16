@@ -1,0 +1,25 @@
+.hero {
+  border-radius: 12px;
+}
+
+.points {
+  margin-top: 30px;
+  bottom: 30px;
+  text-align: center;
+}
+
+.items-grid {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+figure {
+  height: 200px;
+
+  img {
+    object-fit: contain;
+  }
+}

@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {Route, TimeType} from "../route";
-import {ChartOptions} from "../chart-type";
+import {Route, TimeType} from "../../../core/types/route";
+import {ChartOptions} from "../../../core/types/chart-type";
 import {formatDistance} from "date-fns";
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
 

@@ -7,4 +7,5 @@ import {Component, Input} from '@angular/core';
 })
 export class ShopComponent {
   @Input() points: number;
+  @Input() shopItems: any;
 }

@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {MapsService} from "../../../core/services/maps.service";
-import {Route, TimeType} from "../route";
+import {Route, TimeType} from "../../../core/types/route";
 import {format, formatDistance} from "date-fns";
-import {ChartOptions} from "../chart-type";
+import {ChartOptions} from "../../../core/types/chart-type";
 
 @Component({
   selector: 'app-route-planner-container',
