@@ -35,13 +35,18 @@ export class RoutePlannerComponent implements AfterViewInit {
     autocompleteTo.addListener('place_changed', () => this.toChanged.emit(this.toInputHtmlElement.nativeElement.value));
   }
 
-
   timeChangedEvent($event: Event) {
     // @ts-ignore
     this.timeChanged.emit($event.target['value']);
   }
 
   analyze() {
+    document.getElementById('results')?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest"
+    });
+
     this.analyzeClicked.emit();
   }
 }
