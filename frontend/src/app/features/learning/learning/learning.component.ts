@@ -9,6 +9,7 @@ import {ReadableService} from "../../../core/services/readable.service";
 export class LearningComponent {
   @Input() readables: any;
   @Input() points: number;
+  @Input() isLoading: boolean;
 
   constructor(private readableService: ReadableService) {
   }

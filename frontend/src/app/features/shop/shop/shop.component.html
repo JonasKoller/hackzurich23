@@ -23,7 +23,10 @@
   </div>
   <div class="mini-constrainer">
     <p class="text-4xl text-primary">Products</p>
-    <div class="items-grid">
+    <div *ngIf="isLoading" class="loading-bar">
+      <span class="loading loading-bars loading-lg"></span>
+    </div>
+    <div *ngIf="shopItems" class="items-grid">
       <ng-container *ngFor="let shopItem of sortByBuyingPower()">
         <div class="card w-96 bg-base-100 shadow-xl">
           <figure><img [src]="shopItem.image" alt="Shop Item"/></figure>

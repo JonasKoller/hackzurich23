@@ -11,6 +11,7 @@ import {PointsService} from "../../../core/services/points.service";
 export class ArticleContainerComponent {
   article: Article | undefined = undefined;
   isArticleRead = false;
+  isLoading = true;
 
   constructor(
     private readableService: ReadableService,
@@ -25,6 +26,7 @@ export class ArticleContainerComponent {
     if (articleId == null) return;
     this.article = articles.find((a: Article) => a.id === articleId);
     this.isArticleRead = this.readableService.isArticleRead(this.article!.id);
+    this.isLoading = false;
   }
 
   claimCoinsClicked() {

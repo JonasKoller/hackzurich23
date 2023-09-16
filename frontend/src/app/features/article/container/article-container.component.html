@@ -1,1 +1,2 @@
-<app-article *ngIf="article != undefined" [article]="article" (claimCoinsClicked)="claimCoinsClicked()" [isArticleRead]="isArticleRead"></app-article>
+<app-article (claimCoinsClicked)="claimCoinsClicked()" *ngIf="article != undefined" [article]="article"
+             [isArticleRead]="isArticleRead" [isLoading]="isLoading"></app-article>

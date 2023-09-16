@@ -10,6 +10,7 @@ import {PointsService} from "../../../core/services/points.service";
 export class LearningContainerComponent implements OnInit {
   readables$: Observable<any> | null = null;
   points: number = 0;
+  isLoading = true;
 
   constructor(private readableService: ReadableService, private pointsService: PointsService) {
   }
@@ -17,5 +18,6 @@ export class LearningContainerComponent implements OnInit {
   ngOnInit(): void {
     this.readables$ = this.readableService.getAllReadables();
     this.points = this.pointsService.getPoints();
+    this.isLoading = false;
   }
 }

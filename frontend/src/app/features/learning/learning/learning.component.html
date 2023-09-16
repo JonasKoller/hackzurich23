@@ -14,24 +14,28 @@
   </div>
   <div class="points text-xl">
     You have
-    <div class="badge badge-success gap-2 badge-lg"*ngIf="points > 0">{{ points }}</div>
-   <span *ngIf="points <= 0">no </span> points!
+    <div *ngIf="points > 0" class="badge badge-success gap-2 badge-lg">{{ points }}</div>
+    <span *ngIf="points <= 0">no </span> points!
   </div>
   <div class="mini-constrainer">
     <p class="text-4xl text-primary">Articles</p>
-    <div class="articles-grid">
+    <div *ngIf="isLoading" class="loading-bar">
+      <span class="loading loading-bars loading-lg"></span>
+    </div>
+    <div *ngIf="readables && !isLoading" class="articles-grid">
       <ng-container *ngFor="let readable of readables">
         <div class="card w-96 bg-base-100 shadow-xl image-full indicator">
           <figure>
             <img [src]="readable.image"
                  alt="Shoes"/>
           </figure>
-          <span class="indicator-item badge badge-lg badge-accent indicator-top indicator-center z-50" *ngIf="isAlreadyRead(readable.id)">Already read</span>
+          <span *ngIf="isAlreadyRead(readable.id)"
+                class="indicator-item badge badge-lg badge-accent indicator-top indicator-center z-50">Already read</span>
           <div class="card-body">
             <h2 class="card-title">{{ readable.title }}</h2>
             <p>{{ readable.summary }}</p>
             <div class="card-actions justify-end">
-              <a class="btn btn-primary" [routerLink]="['/article']" [queryParams]="{id: readable.id}">Read now</a>
+              <a [queryParams]="{id: readable.id}" [routerLink]="['/article']" class="btn btn-primary">Read now</a>
             </div>
           </div>
         </div>

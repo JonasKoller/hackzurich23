@@ -9,6 +9,7 @@ import {ShopItemsService} from "../../../core/services/shop-items.service";
 export class ShopComponent {
   @Input() points: number;
   @Input() shopItems: any;
+  @Input() isLoading: boolean;
   @Output() buyItemClicked = new EventEmitter<any>();
 
   choosenItem: any;

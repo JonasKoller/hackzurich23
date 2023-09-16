@@ -1,5 +1,8 @@
-<div class="hero max-h-44 min-h-32 drop-shadow-md">
-  <img [src]="article.image" alt="Article Image" class="w-full max-h-44 min-h-32 object-cover" />
+<div *ngIf="isLoading" class="loading-bar">
+  <span class="loading loading-bars loading-lg"></span>
+</div>
+<div *ngIf="article" class="hero max-h-44 min-h-32 drop-shadow-md">
+  <img [src]="article.image" alt="Article Image" class="w-full max-h-44 min-h-32 object-cover"/>
 
   <div class="hero-overlay bg-opacity-60"></div>
   <div class="hero-content text-center text-neutral-content">
@@ -11,6 +14,12 @@
 <article class="p-6 mb-16 text-justify">
   <p>{{article.summary}}</p>
   <p class="mt-8">{{article.text}}</p>
-  <button class="btn btn-block mt-6 btn-primary" [routerLink]="['/learning']" (click)="claimCoinsClick()" *ngIf="isArticleRead == false">Claim <div class="badge badge-success gap-2">{{article.pointReward}}</div> Coins</button>
-  <button class="btn btn-block mt-6 btn-primary" [routerLink]="['/learning']" (click)="claimCoinsClick()" *ngIf="isArticleRead == true">Coins already claimed</button>
+  <button (click)="claimCoinsClick()" *ngIf="isArticleRead == false" [routerLink]="['/learning']"
+          class="btn btn-block mt-6 btn-primary">Claim
+    <div class="badge badge-success gap-2">{{article.pointReward}}</div>
+    Coins
+  </button>
+  <button (click)="claimCoinsClick()" *ngIf="isArticleRead == true" [routerLink]="['/learning']"
+          class="btn btn-block mt-6 btn-primary">Coins already claimed
+  </button>
 </article>
