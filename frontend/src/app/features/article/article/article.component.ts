@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Article} from "../../article";
 
 @Component({
   selector: 'app-article',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class ArticleComponent {
 
+  @Input() article: Article;
+  @Output() claimCoinsClicked = new EventEmitter<void>();
+
+  claimCoinsClick() {
+    this.claimCoinsClicked.emit();
+  }
 }

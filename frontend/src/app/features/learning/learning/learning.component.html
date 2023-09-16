@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="points text-xl">
-    You have <div class="badge badge-success gap-2 badge-lg">23</div> points!
+    You have <div class="badge badge-success gap-2 badge-lg" *ngIf="points > 0">{{ points }}</div> <span *ngIf="points <= 0">no </span> points!
   </div>
   <div class="mini-constrainer">
     <p class="text-4xl text-primary">Articles</p>
@@ -28,7 +28,7 @@
             <h2 class="card-title">{{ readable.title }}</h2>
             <p>{{ readable.summary }}</p>
             <div class="card-actions justify-end">
-              <a class="btn btn-primary" href="#">Read now</a>
+              <a class="btn btn-primary" [routerLink]="['/article']" [queryParams]="{id: readable.id}">Read now</a>
             </div>
           </div>
         </div>

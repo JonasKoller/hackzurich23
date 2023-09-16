@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-learning',
@@ -7,4 +7,5 @@ import {Component, Input} from '@angular/core';
 })
 export class LearningComponent {
   @Input() readables: any;
+  @Input() points: number;
 }

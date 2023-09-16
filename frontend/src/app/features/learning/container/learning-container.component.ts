@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ReadableService} from "../../../core/services/readable.service";
 import {Observable} from "rxjs";
+import {PointsService} from "../../../core/services/points.service";
 
 @Component({
   selector: 'app-learning-container',
@@ -8,11 +9,13 @@ import {Observable} from "rxjs";
 })
 export class LearningContainerComponent implements OnInit {
   readables$: Observable<any> | null = null;
+  points: number = 0;
 
-  constructor(private readableService: ReadableService) {
+  constructor(private readableService: ReadableService, private pointsService: PointsService) {
   }
 
   ngOnInit(): void {
     this.readables$ = this.readableService.getAllReadables();
+    this.points = this.pointsService.getPoints();
   }
 }
