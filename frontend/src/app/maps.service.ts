@@ -2,7 +2,7 @@
 import {} from 'googlemaps';
 import {Injectable} from '@angular/core';
 import {Route, TimeType} from "./features/route-planner/route";
-import {add, addMinutes, formatDistance, setHours, setMinutes, sub, subSeconds} from 'date-fns'
+import {add, addMinutes, formatDistance, setHours, setMinutes, subSeconds} from 'date-fns'
 import DirectionsRequest = google.maps.DirectionsRequest;
 import TrafficModel = google.maps.TrafficModel;
 import Duration = google.maps.Duration;
@@ -56,20 +56,6 @@ export class MapsService {
     }
   }
 
-  private async departureTimeToArivalTime(from: string, to: string, time: Date): Promise<Date> {
-    let routesCar = await this.getRoutesCar(from, to, time);
-    let durationForStandardTransport = routesCar.duration.value;
-    return subSeconds(time, durationForStandardTransport);
-  }
-
-  private transferTimeToCurrentDateAndTime(time: string): Date {
-    let timeSplit = time.split(':');
-    let dateAndTime: Date = new Date(Date.now());
-    dateAndTime = setHours(dateAndTime, Number(timeSplit[0]));
-    dateAndTime = setMinutes(dateAndTime, Number(timeSplit[1]));
-    return new Date(dateAndTime);
-  }
-
   async getCarHistory(from: string, to: string, startDate: Date) {
     const promises = Array
       .from({length: 13}, (_, i) => add(startDate, {minutes: i * 10}))
@@ -85,7 +71,7 @@ export class MapsService {
 
   secondsToDuration(seconds: number): Duration {
     return {
-      text:  formatDistance(0, seconds * 1000, {includeSeconds: true}),
+      text: formatDistance(0, seconds * 1000, {includeSeconds: false}),
       value: seconds
     }
   }
@@ -178,11 +164,16 @@ export class MapsService {
     });
 
     let nearestParkAndRailLatLng: LatLng = await new Promise((resolve, reject) => {
-      this.placesService.nearbySearch({location: startLocation, rankBy: RankBy.DISTANCE, keyword: "SBB P+Rail", type: "parking"},function (response, status) {
+      this.placesService.nearbySearch({
+        location: startLocation,
+        rankBy: RankBy.DISTANCE,
+        keyword: "SBB P+Rail",
+        type: "parking"
+      }, function (response, status) {
         if (status !== google.maps.places.PlacesServiceStatus.OK) {
           reject(status);
         }
-        if (response.length <= 0 || response[0].geometry === undefined ||response[0].geometry.location === undefined) {
+        if (response.length <= 0 || response[0].geometry === undefined || response[0].geometry.location === undefined) {
           reject('No routes found');
           return;
         }
@@ -205,7 +196,10 @@ export class MapsService {
         trafficModel: TrafficModel.BEST_GUESS
       }
     };
-    let distanceToParkAndRail: {durationInTraffic: Duration, duration: Duration} = await new Promise((resolve, reject) => {
+    let distanceToParkAndRail: {
+      durationInTraffic: Duration,
+      duration: Duration
+    } = await new Promise((resolve, reject) => {
       this.directionsService.route(requestDistanceToParkAndRide, function (response, status) {
         if (status !== 'OK') {
           reject(status);
@@ -238,7 +232,7 @@ export class MapsService {
         departureTime: departureDateTrain
       }
     };
-    let distanceFromParkAndRideToDestination: {duration: Duration} = await new Promise((resolve, reject) => {
+    let distanceFromParkAndRideToDestination: { duration: Duration } = await new Promise((resolve, reject) => {
       this.directionsService.route(requestDistanceFromParkAndRideToDestination, function (response, status) {
         if (status !== 'OK') {
           reject(status);
@@ -257,5 +251,19 @@ export class MapsService {
 
     let secondsTotal: number = distanceFromParkAndRideToDestination.duration.value + distanceToParkAndRail.durationInTraffic.value;
     return this.secondsToDuration(secondsTotal);
+  }
+
+  private async departureTimeToArivalTime(from: string, to: string, time: Date): Promise<Date> {
+    let routesCar = await this.getRoutesCar(from, to, time);
+    let durationForStandardTransport = routesCar.duration.value;
+    return subSeconds(time, durationForStandardTransport);
+  }
+
+  private transferTimeToCurrentDateAndTime(time: string): Date {
+    let timeSplit = time.split(':');
+    let dateAndTime: Date = new Date(Date.now());
+    dateAndTime = setHours(dateAndTime, Number(timeSplit[0]));
+    dateAndTime = setMinutes(dateAndTime, Number(timeSplit[1]));
+    return new Date(dateAndTime);
   }
 }

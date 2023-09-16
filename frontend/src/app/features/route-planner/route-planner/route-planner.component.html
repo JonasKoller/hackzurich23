@@ -98,13 +98,15 @@
 
               <div class="stat">
                 <div class="stat-title">Losing time due to traffic</div>
-                <div class="stat-value">{{ results?.car?.offsetTraffic?.text }}</div>
+                <div
+                  [ngClass]="{'text-error' : calculateTrafficStatus() === 'High traffic', 'text-accent' : calculateTrafficStatus() === 'Medium traffic', 'text-success' : calculateTrafficStatus() === 'Low traffic'}"
+                  class="stat-value">{{ results?.car?.offsetTraffic?.text }}</div>
               </div>
               <a [href]="carDeepLink" class="link link-primary">Google Maps</a>
             </div>
           </div>
         </div>
-        <div class="collapse collapse-open border border-base-300 bg-base-200" tabindex="0">
+        <div class="collapse collapse-open border border-base-300 bg-base-200 mb-8" tabindex="0">
           <div class="collapse-title text-xl font-medium">
             <div class="result-info">
               <div class="icon">
@@ -115,7 +117,7 @@
                 </svg>
               </div>
               <div
-                [ngClass]="{'badge-success' : calculateTrainRecomendation() === 'Recommended', 'badge-info' : calculateTrainRecomendation() === 'Neutral', 'badge-error' : calculateTrainRecomendation() === 'Not Recommended'}"
+                [ngClass]="{'badge-success' : calculateTrainRecomendation() === 'Recommended', 'badge-accent' : calculateTrainRecomendation() === 'Neutral', 'badge-error' : calculateTrainRecomendation() === 'Not Recommended'}"
                 class="badge">{{ calculateTrainRecomendation() }}</div>
             </div>
           </div>
@@ -130,11 +132,64 @@
                 <div class="stat-title">{{getTrainAgainstCar() >= 0 ? 'Slower' : 'Faster' }}
                   than car
                 </div>
-                <div class="stat-value">{{ results?.publicTransport?.offsetTraffic?.text }}</div>
+                <div
+                  [ngClass]="{'text-success' : calculateTrainRecomendation() === 'Recommended', 'text-accent' : calculateTrainRecomendation() === 'Neutral', 'text-error' : calculateTrainRecomendation() === 'Not Recommended'}"
+                  class="stat-value">{{ results?.publicTransport?.offsetTraffic?.text }}</div>
               </div>
               <a [href]="sbbDeepLink" class="link link-primary">Check on SBB</a>
             </div>
+          </div>
+        </div>
+        <div class="collapse collapse-open border border-base-300 bg-base-200" tabindex="0">
+          <div class="collapse-title text-xl font-medium">
+            <div class="result-info">
+              <div class="icon">
+                <svg height="48px" viewBox="0 0 48 48" width="48px" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <style>.a {
+                      fill: none;
+                      stroke: #302E80;
+                      stroke-linecap: round;
+                      stroke-width: 2;
+                      stroke-linejoin: round;
+                    }</style>
+                  </defs>
+                  <path class="a" d="M12.5,33.1368V23.6032h3.1211a3.2018,3.2018,0,0,1,0,6.4036H12.5"/>
+                  <path class="a" d="M29.1839,33.1368V23.6032h3.1212a3.2018,3.2018,0,0,1,0,6.4036H29.1839"/>
+                  <line class="a" x1="32.3051" x2="35.4259" y1="30.0068" y2="33.1344"/>
+                  <line class="a" x1="21.6166" x2="26.3834" y1="28.37" y2="28.37"/>
+                  <line class="a" x1="24" x2="24" y1="25.9866" y2="30.7534"/>
+                  <line class="a" x1="12.5" x2="35.5" y1="20.028" y2="20.028"/>
+                  <line class="a" x1="12.5" x2="35.5" y1="36.712" y2="36.712"/>
+                  <path class="a"
+                        d="M26.8706,6.0412l2.8647,2.8677-2.8677,2.8676m-5.7382,0L18.2647,8.9089l2.8677-2.8677"/>
+                  <line class="a" x1="18.2647" x2="29.7353" y1="8.9089" y2="8.9089"/>
+                  <line class="a" x1="24" x2="24" y1="6.0412" y2="11.7765"/>
+                  <circle class="a" cx="24" cy="24" r="21.5"/>
+                  <line class="a" x1="4.4207" x2="43.5793" y1="15.3178" y2="15.3178"/>
+                </svg>
+              </div>
+              <div
+                [ngClass]="{'badge-success' : calculatePPRecomendation() === 'Recommended', 'badge-accent' : calculatePPRecomendation() === 'Neutral', 'badge-error' : calculatePPRecomendation() === 'Not Recommended'}"
+                class="badge">{{ calculatePPRecomendation() }}</div>
+            </div>
+          </div>
+          <div class="collapse-content">
+            <div class="information">
+              <div class="stat">
+                <div class="stat-title">Time till destination</div>
+                <div class="stat-value">{{ results?.parkAndRide?.text }}</div>
+              </div>
 
+              <div class="stat">
+                <div class="stat-title">{{getPPAgainstCar() >= 0 ? 'Slower' : 'Faster' }}
+                  than car
+                </div>
+                <div
+                  [ngClass]="{'text-success' : calculatePPRecomendation() === 'Recommended', 'text-accent' : calculatePPRecomendation() === 'Neutral', 'text-error' : calculatePPRecomendation() === 'Not Recommended'}"
+                  class="stat-value">{{ formatDistance(0, getPPAgainstCar() * 1000, {includeSeconds: false}) }}</div>
+              </div>
+            </div>
           </div>
         </div>
         <div *ngIf="historyGraph !== undefined">

@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Route, TimeType} from "../route";
 import {ChartOptions} from "../chart-type";
+import {formatDistance} from "date-fns";
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
 
 
@@ -28,6 +29,8 @@ export class RoutePlannerComponent implements AfterViewInit {
   @Output() valueSwitchClicked = new EventEmitter<void>();
 
   @Output() analyzeClicked = new EventEmitter<void>();
+  protected readonly undefined = undefined;
+  protected readonly formatDistance = formatDistance;
 
   ngAfterViewInit(): void {
     const options: AutocompleteOptions = {
@@ -97,11 +100,35 @@ export class RoutePlannerComponent implements AfterViewInit {
     }
   }
 
+  calculatePPRecomendation() {
+    if (!this.results) {
+      return '';
+    }
+
+    const PPTimeAgainstCar = this.getPPAgainstCar();
+
+    if (PPTimeAgainstCar <= 0) {
+      return 'Recommended';
+    } else if (PPTimeAgainstCar <= 15) {
+      return 'Neutral'
+    } else {
+      return 'Not Recommended';
+    }
+  }
+
   getTrainAgainstCar() {
     if (!this.results) {
       return 0;
     }
 
     return this.results.publicTransport.duration.value - this.results.car.durationInTraffic.value;
+  }
+
+  getPPAgainstCar() {
+    if (!this.results) {
+      return 0;
+    }
+
+    return this.results.parkAndRide.value - this.results.car.durationInTraffic.value;
   }
 }

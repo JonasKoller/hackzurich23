@@ -11,7 +11,7 @@
 }
 
 .text-content {
-  padding: 16px;
+  padding: 32px 16px;
 }
 
 .card {
@@ -81,6 +81,10 @@
   }
 }
 
+.stat-value {
+  font-size: 24px;
+}
+
 .input-width {
   width: 100%;
 }
@@ -91,6 +95,10 @@
   .label-text {
     margin-bottom: 5px;
   }
+}
+
+.collapse-title {
+  padding-right: 1rem;
 }
 
 .toggle {
