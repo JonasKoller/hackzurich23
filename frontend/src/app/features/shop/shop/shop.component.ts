@@ -11,6 +11,9 @@ export class ShopComponent {
   @Input() shopItems: any;
   @Output() buyItemClicked = new EventEmitter<any>();
 
+  choosenItem: any;
+  amount: number = 1;
+
   constructor(private shopItemsService: ShopItemsService) {
   }
 
@@ -32,11 +35,35 @@ export class ShopComponent {
     });
   }
 
-  buyItem(shopItem: any) {
-    this.buyItemClicked.emit(shopItem);
+  buyItem() {
+    const myDialog: HTMLDialogElement | null = document.querySelector('#buy-dialog');
+    myDialog!.close();
+    this.buyItemClicked.emit({item: this.choosenItem, amount: this.amount});
   }
 
   isOneTimeBought(id: number) {
     return this.shopItemsService.isOneTimeBought(id);
+  }
+
+  showDialog(item: any) {
+    this.amount = 1;
+    this.choosenItem = item;
+    const myDialog: HTMLDialogElement | null = document.querySelector('#buy-dialog');
+    myDialog!.showModal();
+
+    function closeDialog() {
+      myDialog!.close();
+    }
+  }
+
+  addAmount() {
+    if ((this.amount * this.choosenItem.price) + this.choosenItem.price <= this.points) {
+      this.amount += 1;
+    }
+  }
+
+  subAmount() {
+    if (this.amount > 1)
+      this.amount -= 1;
   }
 }

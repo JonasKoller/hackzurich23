@@ -37,10 +37,73 @@
                   [ngClass]="{ 'badge-error': shopItem.classification === 'One Time only', 'badge-accent': shopItem.classification === 'New' }"
                   class="badge">{{ shopItem.classification }}</span>
             <div class="card-actions justify-end">
-              <button (click)="buyItem(shopItem)"
+              <button (click)="showDialog(shopItem)"
                       [ngClass]="{'btn-disabled': points < shopItem.price || isOneTimeBought(shopItem.id)}"
                       class="btn btn-primary">{{ isOneTimeBought(shopItem.id) ? 'Bought' : 'Buy now' }}
               </button>
+              <dialog class="modal" id="buy-dialog">
+                <div class="modal-box">
+                  <form method="dialog">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                  </form>
+                  <h3 class="font-bold text-lg">Buy: {{ choosenItem?.itemName }}</h3>
+                  <p class="py-4">Enter your Shipment data</p>
+                  <div class="form-content">
+                    <div class="form-control">
+                      <input class="input input-bordered input-primary input-width" placeholder="Full Name"
+                             type="text"/>
+                    </div>
+                    <div class="form-control">
+                      <input class="input input-bordered input-primary input-width" placeholder="Email"
+                             type="text"/>
+                    </div>
+                    <div class="form-control">
+                      <input class="input input-bordered input-primary input-width" placeholder="Address"
+                             type="text"/>
+                    </div>
+                    <div class="form-control">
+                      <input class="input input-bordered input-primary input-width" placeholder="Postal Code"
+                             type="text"/>
+                    </div>
+                    <div class="form-control">
+                      <input class="input input-bordered input-primary input-width" placeholder="Place"
+                             type="text"/>
+                    </div>
+                  </div>
+                  <div *ngIf="choosenItem?.classification !== 'One Time only'">
+                    <p class="py-4">How many do you want to buy?</p>
+                    <p class="py-4 text-secondary">You will have {{ points - (amount * choosenItem?.price) }} points
+                      remaining</p>
+                    <div class="amount">
+                      <button (click)="subAmount()" class="btn btn-circle">
+                        <svg fill="none" height="32px" viewBox="0 0 24 24" width="32px"
+                             xmlns="http://www.w3.org/2000/svg">
+                          <path clip-rule="evenodd" d="M6.00001 11.25L18 11.25L18 12.75L6.00001 12.75L6.00001 11.25Z"
+                                fill="currentColor" fill-rule="evenodd"/>
+                        </svg>
+                      </button>
+                      <p class="text-primary">{{ amount }}</p>
+                      <button (click)="addAmount()" class="btn btn-circle">
+                        <svg height="20px" version="1.1" viewBox="0 -0.5 21 21" width="20px"
+                             xmlns="http://www.w3.org/2000/svg">
+                          <g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="2">
+                            <g fill="currentColor" id="Dribbble-Light-Preview"
+                               transform="translate(-379.000000, -240.000000)">
+                              <g id="icons" transform="translate(56.000000, 160.000000)">
+                                <polygon id="plus-[#1512]"
+                                         points="344 89 344 91 334.55 91 334.55 100 332.45 100 332.45 91 323 91 323 89 332.45 89 332.45 80 334.55 80 334.55 89">
+
+                                </polygon>
+                              </g>
+                            </g>
+                          </g>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <button (click)="buyItem()" class="btn btn-secondary button-buy">Buy</button>
+                </div>
+              </dialog>
             </div>
           </div>
         </div>

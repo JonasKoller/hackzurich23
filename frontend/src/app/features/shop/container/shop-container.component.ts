@@ -19,16 +19,16 @@ export class ShopContainerComponent implements OnInit {
     this.shopItems$ = this.shopItemsService.getAllShopItems();
   }
 
-  buyShopItem(shopItem: any) {
-    if (this.shopItemsService.isOneTimeBought(shopItem.id)) {
+  buyShopItem(buy: any) {
+    if (this.shopItemsService.isOneTimeBought(buy.item.id)) {
       return;
     }
 
-    if (shopItem.classification === 'One Time only') {
-      this.shopItemsService.setOneTimeOnlyBuyed(shopItem);
+    if (buy.item.classification === 'One Time only') {
+      this.shopItemsService.setOneTimeOnlyBuyed(buy.item);
     }
 
-    this.pointsService.subPoint(shopItem.price);
+    this.pointsService.subPoint(buy.item.price * buy.amount);
     this.points = this.pointsService.getPoints();
   }
 }
