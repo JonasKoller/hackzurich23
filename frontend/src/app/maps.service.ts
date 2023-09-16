@@ -17,13 +17,12 @@ export class MapsService {
   }
 
   async makeShitHappen(from: string, to: string): Promise<Route> {
-    const [car, publicTransport, parkAndRide] = await Promise.all([
+    const [car, publicTransport] = await Promise.all([
       this.getRoutesCar(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
       this.getRoutesPublic(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
-      this.getRoutesParkAndRide(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
+      // this.getRoutesParkAndRide(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
     ]);
 
-    console.log(parkAndRide);
     return {
       car: {
         ...car,
