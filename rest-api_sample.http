@@ -1,0 +1,17 @@
+POST https://routes.googleapis.com/directions/v2:computeRoutes
+X-Goog-Api-Key: API_KEY
+X-Goog-FieldMask: routes.duration,routes.distanceMeters
+Content-Type: application/json
+
+{
+    "origin": {
+      "address": "1800 Amphitheatre Parkway, Mountain View, CA 94043"
+    },
+    "destination": {
+      "address": "Sloat Blvd &, Upper Great Hwy, San Francisco, CA 94132"
+    },
+  "travelMode": "DRIVE"
+  }
+
+###
+
