@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {ReadableService} from "../../../core/services/readable.service";
 
 @Component({
   selector: 'app-learning',
@@ -8,4 +9,11 @@ import {Component, Input, OnInit} from '@angular/core';
 export class LearningComponent {
   @Input() readables: any;
   @Input() points: number;
+
+  constructor(private readableService: ReadableService) {
+  }
+
+  isAlreadyRead(id: number): boolean {
+    return this.readableService.isArticleRead(id);
+  }
 }

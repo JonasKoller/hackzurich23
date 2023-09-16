@@ -19,13 +19,17 @@ const routes: Routes = [
     loadChildren: () => import('./features/shop/shop.module').then((m) => m.ShopModule),
   },
   {
+    path: 'follow-me',
+    loadChildren: () => import('./features/follow-me/follow-me.module').then((m) => m.FollowMeModule),
+  },
+  {
     path: '**',
     redirectTo: 'route-planner',
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'top'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

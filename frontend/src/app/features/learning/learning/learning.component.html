@@ -21,11 +21,12 @@
     <p class="text-4xl text-primary">Articles</p>
     <div class="articles-grid">
       <ng-container *ngFor="let readable of readables">
-        <div class="card w-96 bg-base-100 shadow-xl image-full">
+        <div class="card w-96 bg-base-100 shadow-xl image-full indicator">
           <figure>
             <img [src]="readable.image"
                  alt="Shoes"/>
           </figure>
+          <span class="indicator-item badge badge-lg badge-accent indicator-top indicator-center z-50" *ngIf="isAlreadyRead(readable.id)">Already read</span>
           <div class="card-body">
             <h2 class="card-title">{{ readable.title }}</h2>
             <p>{{ readable.summary }}</p>
