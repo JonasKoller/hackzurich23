@@ -69,8 +69,12 @@
     </div>
     <div *ngIf="results !== undefined">
       <p>{{ results!.startAddress }}</p>
-      <p>|</p>
-      <p>\/</p>
+      <div>
+        <svg fill="none" height="36px" viewBox="0 0 24 24" width="36px" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 6V18M12 18L7 13M12 18L17 13" stroke="#302E80" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2"/>
+        </svg>
+      </div>
       <p class="mb-2">{{ results!.endAddress }}</p>
       <p class="text-4xl text-primary mb-8">Results</p>
       <div class="result">
