@@ -1,0 +1,59 @@
+input[type="range"] {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  /* creating a custom design */
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  /*  slider progress trick  */
+  overflow: hidden;
+  border-radius: 50px;
+  border: 1px solid #110d6e;
+}
+
+/* Track: webkit browsers */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 60px;
+  background: transparent;
+  border-radius: 100%;
+}
+
+/* Track: Mozilla Firefox */
+input[type="range"]::-moz-range-track {
+  height: 60px;
+  background: transparent;
+  border-radius: 100%;
+}
+
+/* Thumb: webkit */
+input[type="range"]::-webkit-slider-thumb {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  /* creating a custom design */
+  height: 60px;
+  width: 60px;
+  background-color: #312e7f; // Center of drag
+  border-radius: 100%;
+  border: 4px solid #312e7f; // Border of drag
+  /*  slider progress trick  */
+  box-shadow: -407px 0 0 380px #8985da; // Color for already pushed part
+}
+
+
+/* Thumb: Firefox */
+input[type="range"]::-moz-range-thumb {
+  height: 15px;
+  width: 15px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #110d6e;
+  /*  slider progress trick  */
+  box-shadow: -407px 0 0 400px #f50;
+}
+
+.range {
+  display: flex;
+  align-items: center;
+}
