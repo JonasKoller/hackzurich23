@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
 import {MapsService} from "../../../maps.service";
+import {TimeType} from "../route";
 
 @Component({
   selector: 'app-route-planner',
@@ -12,8 +13,12 @@ export class RoutePlannerComponent implements AfterViewInit {
   @ViewChild('fromInput', { static: false }) fromInputHtmlElement: ElementRef;
   @ViewChild('toInput', { static: false }) toInputHtmlElement: ElementRef;
 
+  @Input() timeType: TimeType;
+
   @Output() fromChanged = new EventEmitter<string>();
   @Output() toChanged = new EventEmitter<string>();
+  @Output() timeChanged = new EventEmitter<string>();
+  @Output() timeTypeChanged = new EventEmitter<TimeType>();
 
   ngAfterViewInit(): void {
     const options: AutocompleteOptions = {
@@ -29,4 +34,7 @@ export class RoutePlannerComponent implements AfterViewInit {
   }
 
 
+  timeChangedEvent($event: Event) {
+    this.timeChanged.emit($event.value);
+  }
 }

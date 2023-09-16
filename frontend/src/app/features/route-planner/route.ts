@@ -12,3 +12,8 @@ interface Duration {
   text: string;
   value: number;
 }
+
+export enum TimeType {
+  ARRIVAL,
+  DEPARTURE
+}
