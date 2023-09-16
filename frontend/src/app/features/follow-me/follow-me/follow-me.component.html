@@ -1,10 +1,12 @@
-<div class="flex justify-center justify-items-center items-center flex-col mt-6 text-center">
-  <img src="/assets/images/track.svg" alt="Tracking illustration" class="w-1/3">
-  <section class="p-6">
-    <p>We love exact predictions about traffic jams - and you too. For those we need data. With "Follow me" you help to make better traffic jam predictions while also profiting for yourself. And this without loosing privacy!</p>
-    <p><a href="#" class="link link-accent">Read more about it</a></p>
-  </section>
-</div>
+<div class="constrainer">
+  <div class="flex justify-center justify-items-center items-center flex-col mt-6 text-center">
+    <img alt="Tracking illustration" class="w-1/3" src="/assets/images/track.svg">
+    <section class="p-6">
+      <p>We love exact predictions about traffic jams - and you too. For those we need data. With "Follow me" you help
+        to make better traffic jam predictions while also profiting for yourself. And this without loosing privacy!</p>
+      <p><a class="link link-accent" href="#">Read more about it</a></p>
+    </section>
+  </div>
 
 <div class="p-3" *ngIf="sliderValue == 500">
   <div class="alert flex p-3 flex-col">
@@ -15,10 +17,11 @@
   </div>
 </div>
 
-<div class="p-6 flex items-center justify-items-center flex-col">
-  <div class="range w-full h-16 max-w-sm inline-block relative">
-    <input type="range" (change)="change($event)" min="0" max="500" value="0"/>
-    <p class="absolute left-6 text-white" *ngIf="sliderValue == 500">Tracking is running...</p>
-    <p class="absolute right-6 text-slate-400" *ngIf="sliderValue == 0">Pull to start tracking...</p>
+  <div class="p-6 flex items-center justify-items-center flex-col">
+    <div class="range w-full h-16 max-w-sm inline-block relative">
+      <input (change)="change($event)" max="500" min="0" type="range" value="0"/>
+      <p *ngIf="sliderValue == 500" class="absolute left-6 text-white">Tracking is running...</p>
+      <p *ngIf="sliderValue == 0" class="absolute right-6 text-slate-400">Pull to start tracking...</p>
+    </div>
   </div>
 </div>
