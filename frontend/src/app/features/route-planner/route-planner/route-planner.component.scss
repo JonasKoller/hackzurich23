@@ -45,6 +45,27 @@
   }
 }
 
+.result-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.search-img {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+
+  img {
+    max-width: 450px;
+    width: 100%;
+  }
+}
+
 .input-width {
   width: 100%;
 }

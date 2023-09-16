@@ -19,9 +19,9 @@ export class RoutePlannerComponent implements AfterViewInit {
   @Output() toChanged = new EventEmitter<string>();
   @Output() timeChanged = new EventEmitter<string>();
   @Output() timeTypeChanged = new EventEmitter<TimeType>();
+  @Output() valueSwitchClicked = new EventEmitter<void>();
 
   @Output() analyzeClicked = new EventEmitter<void>();
-  protected readonly undefined = undefined;
 
   ngAfterViewInit(): void {
     const options: AutocompleteOptions = {
@@ -51,5 +51,12 @@ export class RoutePlannerComponent implements AfterViewInit {
     this.analyzeClicked.emit();
   }
 
-  protected readonly undefined = undefined;
+  valueSwitch() {
+    const oldFrom = this.fromInputHtmlElement.nativeElement.value
+
+    this.fromInputHtmlElement.nativeElement.value = this.toInputHtmlElement.nativeElement.value;
+    this.toInputHtmlElement.nativeElement.value = oldFrom;
+
+    this.valueSwitchClicked.emit();
+  }
 }

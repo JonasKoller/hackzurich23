@@ -8,6 +8,8 @@ export interface Route {
     duration: Duration,
     offsetTraffic: Duration,
   };
+  startAddress: string;
+  endAddress: string;
 }
 
 interface Duration {
