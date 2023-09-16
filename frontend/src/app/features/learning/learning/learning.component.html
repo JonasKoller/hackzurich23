@@ -1,1 +1,35 @@
-<p>learning works!</p>
+<div class="constrainer">
+  <div class="mini-constrainer">
+    <div class="hero bg-secondary">
+      <div class="hero-content text-center text-neutral-content">
+        <div class="max-w-md">
+          <h1 class="text-5xl font-bold">Learn about traffic</h1>
+          <p class="py-6">Discover the art of reducing traffic congestion by diving into our informative articles. Not
+            only will you gain insights, but every article you complete earns you points. Accumulate them and unlock a
+            treasure trove of automobile goodies waiting just for you!</p>
+          <button class="btn btn-primary">To the shop</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mini-constrainer">
+    <p class="text-4xl text-primary">Articles</p>
+    <div class="articles-grid">
+      <ng-container *ngFor="let readable of readables">
+        <div class="card w-96 bg-base-100 shadow-xl image-full">
+          <figure>
+            <img [src]="readable.image"
+                 alt="Shoes"/>
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">{{ readable.title }}</h2>
+            <p>{{ readable.summary }}</p>
+            <div class="card-actions justify-end">
+              <a class="btn btn-primary" href="#">Read now</a>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
