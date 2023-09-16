@@ -2,6 +2,7 @@
 import {} from 'googlemaps';
 import {Injectable} from '@angular/core';
 import {Route} from "./features/route-planner/route";
+import {formatDistance} from 'date-fns'
 import DirectionsRequest = google.maps.DirectionsRequest;
 import TrafficModel = google.maps.TrafficModel;
 import Duration = google.maps.Duration;
@@ -21,7 +22,23 @@ export class MapsService {
       this.getRoutesPublic(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
     ])
 
-    return {car, publicTransport}
+    return {
+      car: {
+        ...car,
+        offsetTraffic: this.secondsToDuration(car.durationInTraffic.value - car.duration.value)
+      },
+      publicTransport: {
+        ...publicTransport,
+        offsetTraffic: this.secondsToDuration(car.durationInTraffic.value - publicTransport.duration.value)
+      }
+    }
+  }
+
+  secondsToDuration(seconds: number): Duration {
+    return {
+      text: formatDistance(0, seconds * 1000, {includeSeconds: true}),
+      value: seconds
+    }
   }
 
   getRoutesCar(start: string, end: string, date: Date): Promise<{

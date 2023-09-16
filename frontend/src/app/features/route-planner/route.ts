@@ -1,10 +1,12 @@
 export interface Route {
   car: {
     durationInTraffic: Duration,
-    duration: Duration
+    duration: Duration,
+    offsetTraffic: Duration,
   };
   publicTransport: {
-    duration: Duration
+    duration: Duration,
+    offsetTraffic: Duration,
   };
 }
 
