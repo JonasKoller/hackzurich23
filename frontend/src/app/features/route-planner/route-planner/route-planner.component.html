@@ -33,9 +33,12 @@
             <input class="input input-bordered input-primary" placeholder="Arrival Time" type="time"/>
           </div>
           <div class="form-control mt-6">
-            <button class="btn btn-primary">Analyze Trip</button>
+            <button class="btn btn-primary" (click)="analyze()">Analyze Trip</button>
           </div>
         </div>
+        <ng-container *ngIf="results !== undefined">
+          {{results}}
+        </ng-container>
       </div>
     </div>
   </div>

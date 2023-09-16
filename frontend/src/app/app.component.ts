@@ -9,11 +9,9 @@ import {MapsService} from "./maps.service";
 export class AppComponent implements OnInit{
   title = 'frontend';
 
-  constructor(private readonly mapsService: MapsService) {
-  }
+
 
   ngOnInit() {
-    this.mapsService.test();
   }
 
 }

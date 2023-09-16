@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
+import {MapsService} from "../../../maps.service";
 
 @Component({
   selector: 'app-route-planner',
@@ -26,5 +27,6 @@ export class RoutePlannerComponent implements AfterViewInit {
     const autocompleteTo = new google.maps.places.Autocomplete(this.toInputHtmlElement.nativeElement, options);
     autocompleteTo.addListener('place_changed', () => this.toChanged.emit(this.toInputHtmlElement.nativeElement.value));
   }
+
 
 }
