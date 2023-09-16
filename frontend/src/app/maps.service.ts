@@ -1,9 +1,10 @@
 // noinspection ES6UnusedImports
 import {} from 'googlemaps';
 import {Injectable} from '@angular/core';
+import {Route} from "./features/route-planner/route";
 import DirectionsRequest = google.maps.DirectionsRequest;
 import TrafficModel = google.maps.TrafficModel;
-import TravelMode = google.maps.TravelMode;
+import Duration = google.maps.Duration;
 
 @Injectable({
   providedIn: 'root'
@@ -14,23 +15,26 @@ export class MapsService {
   constructor() {
   }
 
-  async makeShitHappen(from: string, to: string) {
+  async makeShitHappen(from: string, to: string): Promise<Route> {
     const [car, publicTransport] = await Promise.all([
-      this.getRoutes(from, to, new Date("18 Sep 2023 05:00:10 GMT"), google.maps.TravelMode.DRIVING),
-      this.getRoutes(from, to, new Date("18 Sep 2023 05:00:10 GMT"), google.maps.TravelMode.TRANSIT),
+      this.getRoutesCar(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
+      this.getRoutesPublic(from, to, new Date("18 Sep 2023 05:00:10 GMT")),
     ])
 
-    return
+    return {car, publicTransport}
   }
 
-  getRoutes(start: string, end: string, date: Date, method: TravelMode) {
+  getRoutesCar(start: string, end: string, date: Date): Promise<{
+    durationInTraffic: Duration,
+    duration: Duration
+  }> {
     var request: DirectionsRequest = {
       origin: start,
       destination: end,
       // Note that JavaScript allows us to access the constant
       // using square brackets and a string value as its
       // "property."
-      travelMode: method,
+      travelMode: google.maps.TravelMode.DRIVING,
       drivingOptions: {
         departureTime: date,
         trafficModel: TrafficModel.BEST_GUESS
@@ -49,7 +53,39 @@ export class MapsService {
         const aa = {
           durationInTraffic: response.routes[0].legs[0].duration_in_traffic,
           duration: response.routes[0].legs[0].duration,
-          response
+        };
+        resolve(aa);
+      });
+    });
+  }
+
+  getRoutesPublic(start: string, end: string, date: Date): Promise<{
+    duration: Duration
+  }> {
+    var request: DirectionsRequest = {
+      origin: start,
+      destination: end,
+      // Note that JavaScript allows us to access the constant
+      // using square brackets and a string value as its
+      // "property."
+      travelMode: google.maps.TravelMode.TRANSIT,
+      drivingOptions: {
+        departureTime: date,
+        trafficModel: TrafficModel.BEST_GUESS
+      }
+    };
+    return new Promise((resolve, reject) => {
+      this.directionsService.route(request, function (response, status) {
+        if (status !== 'OK') {
+          reject(status);
+        }
+        if (response.routes.length <= 0 || response.routes[0].legs.length <= 0) {
+          reject('No routes found');
+        }
+        console.log("get route: ", response);
+
+        const aa = {
+          duration: response.routes[0].legs[0].duration,
         };
         resolve(aa);
       });

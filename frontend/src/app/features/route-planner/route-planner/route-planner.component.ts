@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Route, TimeType} from "../route";
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
-import {MapsService} from "../../../maps.service";
-import {TimeType} from "../route";
 
 @Component({
   selector: 'app-route-planner',
@@ -10,19 +9,22 @@ import {TimeType} from "../route";
 })
 export class RoutePlannerComponent implements AfterViewInit {
 
-  @ViewChild('fromInput', { static: false }) fromInputHtmlElement: ElementRef;
-  @ViewChild('toInput', { static: false }) toInputHtmlElement: ElementRef;
+  @ViewChild('fromInput', {static: false}) fromInputHtmlElement: ElementRef;
+  @ViewChild('toInput', {static: false}) toInputHtmlElement: ElementRef;
 
   @Input() timeType: TimeType;
+  @Input() results?: Route = undefined;
 
   @Output() fromChanged = new EventEmitter<string>();
   @Output() toChanged = new EventEmitter<string>();
   @Output() timeChanged = new EventEmitter<string>();
   @Output() timeTypeChanged = new EventEmitter<TimeType>();
 
+  @Output() analyzeClicked = new EventEmitter<void>();
+
   ngAfterViewInit(): void {
     const options: AutocompleteOptions = {
-      componentRestrictions: { country: 'ch' },
+      componentRestrictions: {country: 'ch'},
       fields: ['address_components', 'geometry', 'name'],
       strictBounds: false
     };
@@ -35,6 +37,11 @@ export class RoutePlannerComponent implements AfterViewInit {
 
 
   timeChangedEvent($event: Event) {
-    this.timeChanged.emit($event.value);
+    // @ts-ignore
+    this.timeChanged.emit($event.target['value']);
+  }
+
+  analyze() {
+    this.analyzeClicked.emit();
   }
 }

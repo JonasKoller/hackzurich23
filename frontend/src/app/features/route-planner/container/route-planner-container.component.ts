@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
 import {MapsService} from "../../../maps.service";
+import {Route} from "../route";
 
 @Component({
   selector: 'app-route-planner-container',
   templateUrl: './route-planner-container.component.html',
 })
 export class RoutePlannerContainerComponent {
-  results: any = undefined;
+  results?: Route = undefined;
   from: string = '';
   to: string = '';
 
@@ -14,7 +15,7 @@ export class RoutePlannerContainerComponent {
   }
 
   async analyze() {
-    this.results = await this.mapsService.makeShitHappen();
+    this.results = await this.mapsService.makeShitHappen(this.from, this.to);
   }
 
   fromChanged($event: string) {
