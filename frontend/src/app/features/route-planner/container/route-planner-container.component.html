@@ -1,3 +1,8 @@
 <app-route-planner (analyzeClicked)="analyze()" (fromChanged)="fromChanged($event)"
                    (toChanged)="toChanged($event)" (valueSwitchClicked)="switchValues()"
-                   [results]="results"></app-route-planner>
+                   [results]="results"
+                   [sbbDeepLink]="createSbbDeepLink()"
+                   [time]="time"
+                    [timeType]="timeType"
+                  (timeTypeChanged)="timeTypeChanged($event)"
+                (timeChanged)="timeChanged($event)"></app-route-planner>

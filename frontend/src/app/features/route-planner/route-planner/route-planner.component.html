@@ -29,7 +29,9 @@
               </button>
             </div>
             <div class="form-control">
-              <input (change)="timeChangedEvent($event)" class="input input-bordered input-primary input-width"
+              <input (change)="timeChangedEvent($event)"
+                     [value]="time"
+                     class="input input-bordered input-primary input-width"
                      placeholder="Time"
                      type="time"/>
             </div>
@@ -106,6 +108,7 @@
             <div class="information">
               <p>Time till destination {{ results.publicTransport.duration.text }}</p>
               <p>Slower than car {{ results.publicTransport.offsetTraffic.text }}</p>
+              <a [href]="sbbDeepLink">SBB CRAZY</a>
             </div>
           </div>
         </div>

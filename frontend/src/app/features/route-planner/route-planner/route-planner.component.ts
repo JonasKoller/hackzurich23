@@ -13,7 +13,9 @@ export class RoutePlannerComponent implements AfterViewInit {
   @ViewChild('toInput', {static: false}) toInputHtmlElement: ElementRef;
 
   @Input() timeType: TimeType;
+  @Input() time: string;
   @Input() results?: Route = undefined;
+  @Input() sbbDeepLink: string;
 
   @Output() fromChanged = new EventEmitter<string>();
   @Output() toChanged = new EventEmitter<string>();
