@@ -4,6 +4,7 @@ import {RoutePlannerContainerComponent} from './container/route-planner-containe
 import {RoutePlannerComponent} from './route-planner/route-planner.component';
 import {RouterModule} from "@angular/router";
 import {NgApexchartsModule} from "ng-apexcharts";
+import {FormsModule} from "@angular/forms";
 
 const routes = [{path: '', component: RoutePlannerContainerComponent}];
 
@@ -16,6 +17,7 @@ const routes = [{path: '', component: RoutePlannerContainerComponent}];
     CommonModule,
     RouterModule.forChild(routes),
     NgApexchartsModule,
+    FormsModule,
   ]
 })
 export class RoutePlannerModule {

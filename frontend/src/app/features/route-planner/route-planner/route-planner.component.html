@@ -38,8 +38,8 @@
               </div>
               <div class="form-control">
                 <label class="cursor-pointer label label-time">
-                  <span class="label-text">Start</span>
-                  <input class="toggle toggle-secondary" type="checkbox"/>
+                  <span class="label-text">{{ isEnd ? 'End' : 'Start' }}</span>
+                  <input [(ngModel)]="isEnd" class="toggle toggle-secondary" type="checkbox"/>
                 </label>
               </div>
             </div>

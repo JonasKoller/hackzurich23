@@ -29,7 +29,7 @@ export class RoutePlannerComponent implements AfterViewInit {
   @Output() valueSwitchClicked = new EventEmitter<void>();
 
   @Output() analyzeClicked = new EventEmitter<void>();
-  protected readonly undefined = undefined;
+  isEnd = false;
   protected readonly formatDistance = formatDistance;
 
   ngAfterViewInit(): void {
