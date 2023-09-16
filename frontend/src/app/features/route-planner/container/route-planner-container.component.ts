@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
-import {MapsService} from "../../../maps.service";
+import {MapsService} from "../../../core/services/maps.service";
 import {Route, TimeType} from "../route";
-import {format} from "date-fns";
+import {format, formatDistance} from "date-fns";
 import {ChartOptions} from "../chart-type";
-import {formatDistance} from "date-fns";
 
 @Component({
   selector: 'app-route-planner-container',
@@ -23,7 +22,7 @@ export class RoutePlannerContainerComponent {
 
   async analyze() {
     this.results = await this.mapsService.makeShitHappen(this.from, this.to, this.time, this.timeType);
-    this.historyChart  = {
+    this.historyChart = {
       series: [
         {
           name: "Times",
@@ -119,7 +118,7 @@ export class RoutePlannerContainerComponent {
     console.log('ALARM! ' + this.time);
   }
 
-  createCarDeepLink():string {
+  createCarDeepLink(): string {
     return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(this.from)}&destination=${encodeURIComponent(this.to)}&travelmode=driving&dir_action=navigate`;
   }
 

@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PointsService {
 
-  constructor() { }
-
   private readonly LOCALSTORAGE_POINTS = 'user.points';
+
+  constructor() {
+  }
 
   getPoints(): number {
     let points = localStorage.getItem(this.LOCALSTORAGE_POINTS);
@@ -20,5 +21,9 @@ export class PointsService {
 
   addPoints(points: number): void {
     localStorage.setItem(this.LOCALSTORAGE_POINTS, String(this.getPoints() + points));
+  }
+
+  subPoint(points: number): void {
+    localStorage.setItem(this.LOCALSTORAGE_POINTS, String(this.getPoints() - points));
   }
 }

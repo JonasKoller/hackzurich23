@@ -7,13 +7,15 @@
           <p class="py-6">Discover the art of reducing traffic congestion by diving into our informative articles. Not
             only will you gain insights, but every article you complete earns you points. Accumulate them and unlock a
             treasure trove of automobile goodies waiting just for you!</p>
-          <button class="btn btn-primary">To the shop</button>
+          <a [routerLink]="['/shop']" class="btn btn-primary">To the shop</a>
         </div>
       </div>
     </div>
   </div>
   <div class="points text-xl">
-    You have <div class="badge badge-success gap-2 badge-lg" *ngIf="points > 0">{{ points }}</div> <span *ngIf="points <= 0">no </span> points!
+    You have
+    <div class="badge badge-success gap-2 badge-lg"*ngIf="points > 0">{{ points }}</div>
+   <span *ngIf="points <= 0">no </span> points!
   </div>
   <div class="mini-constrainer">
     <p class="text-4xl text-primary">Articles</p>

@@ -1,7 +1,7 @@
 // noinspection ES6UnusedImports
 import {} from 'googlemaps';
 import {Injectable} from '@angular/core';
-import {Route, TimeType} from "./features/route-planner/route";
+import {Route, TimeType} from "../../features/route-planner/route";
 import {add, addMinutes, formatDistance, setHours, setMinutes, subSeconds} from 'date-fns'
 import DirectionsRequest = google.maps.DirectionsRequest;
 import TrafficModel = google.maps.TrafficModel;

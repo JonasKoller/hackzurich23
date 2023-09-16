@@ -1,0 +1,7 @@
+<div class="constrainer">
+  <div class="points text-xl">
+    You have
+    <div *ngIf="points > 0" class="badge badge-success gap-2 badge-lg">{{ points }}</div>
+    <span *ngIf="points <= 0">no </span> points!
+  </div>
+</div>
