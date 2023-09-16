@@ -115,4 +115,8 @@ export class RoutePlannerContainerComponent {
   timeChanged($event: string) {
     this.time = $event;
   }
+
+  createCarDeepLink():string {
+    return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(this.from)}&destination=${encodeURIComponent(this.to)}&travelmode=driving&dir_action=navigate`;
+  }
 }
